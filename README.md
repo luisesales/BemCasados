@@ -1,7 +1,7 @@
 # nuptia
 
-A new Flutter project.
-
+Um aplicativo de planejamento orçamentário para casamentos. v2.0
+ 
 ## Getting Started
 
 This project is a starting point for a Flutter application.
