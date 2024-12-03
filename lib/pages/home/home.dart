@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nuptia/components/AppSearchBar.dart';
-import 'package:nuptia/components/CircleCartIcon.dart';
-import 'package:nuptia/components/CustomAppBar.dart';
+import 'package:nuptia/widgets/AppSearchBar.dart';
+import 'package:nuptia/widgets/CircleCartIcon.dart';
+import 'package:nuptia/widgets/CustomAppBar.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
