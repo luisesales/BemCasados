@@ -58,6 +58,7 @@ flutter:
   assets: 
   - assets/images/logo.svg  
   - assets/images/casal_na_moto.png
+  - assets/images/casal_tomando_cafe.png
 
 
   # The following line ensures that the Material Icons font is

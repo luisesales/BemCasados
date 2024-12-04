@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:nuptia/utils/routes.dart';
 
 class SelectUser extends StatelessWidget {
   final Function(bool) onSelected;
@@ -13,21 +12,21 @@ class SelectUser extends StatelessWidget {
         color: Theme.of(context).primaryColor,
         child: Center(
           heightFactor: MediaQuery.of(context).size.height,
-          child: Column(
+          child: ListView(
             children: [
               Expanded(
                   flex: 1, child: SvgPicture.asset("assets/images/logo.svg")),
               Expanded(
                 flex: 3,
                 child: Image.asset(
-                  'assets/images/casal_na_moto.png',
-                  height: 220, // Aumentei o tamanho da imagem
+                  'assets/images/casal_tomando_cafe.png',
+                  height: 520,
                 ),
               ),
               Expanded(
                 flex: 1,
                 child: Container(
-                  margin: EdgeInsets.only(left: 16, right: 16),
+                  margin: EdgeInsets.only(top: 40, left: 16, right: 16),
                   child: Column(
                     children: [
                       SizedBox(
