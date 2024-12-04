@@ -74,6 +74,7 @@ class SelectUser extends StatelessWidget {
                           ),
                           onPressed: () {
                             onSelected(true);
+                            Navigator.of(context).pushNamed('/login');
                           },
                           child: Padding(
                             padding: EdgeInsets.fromLTRB(32, 16, 32, 16),

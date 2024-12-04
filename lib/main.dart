@@ -1,4 +1,3 @@
-import 'package:nuptia/pages/auth/intro.dart';
 import 'package:nuptia/pages/auth/login.dart';
 import 'package:nuptia/pages/auth/selectUser.dart';
 import 'package:nuptia/pages/auth/register.dart';
@@ -10,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:nuptia/model/userList.dart';
 import 'package:provider/provider.dart';
 import 'package:nuptia/utils/routes.dart';
-import 'dart:async';
 
 void main() {
   runApp(MyApp());
