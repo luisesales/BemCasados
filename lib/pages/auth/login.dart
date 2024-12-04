@@ -20,8 +20,8 @@ class Login extends StatelessWidget {
     final _passwordFocus = FocusNode();
     final _formData = Map<String, Object>();
 
-    void setData(String username, data) {
-      _formData[data] = username;
+    void setData(String input, data) {
+      _formData[data] = input;
     }
 
     void login() {}
@@ -90,7 +90,9 @@ class Login extends StatelessWidget {
                         'Esqueceu a senha?',
                         style: Theme.of(context).textTheme.headlineMedium,
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pushNamed('/forgot-password');
+                      },
                     ),
                     Container(
                       height: 8,
@@ -126,8 +128,7 @@ class Login extends StatelessWidget {
                             style: Theme.of(context).textTheme.headlineMedium,
                           ),
                           onPressed: () {
-                            Navigator.of(context)
-                                .pushReplacementNamed('register');
+                            Navigator.of(context).pushNamed('/register');
                           },
                         ),
                       ],

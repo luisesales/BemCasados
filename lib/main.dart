@@ -56,14 +56,14 @@ class _MyAppState extends State<MyApp> {
         home: SplashScreen(),
         routes: {
           Routes.WELCOME_SCREEN: (context) => WelcomeScreen(),
-          /*Routes.FORGOT_PASSWORD : (context) => ForgotPassword(
-            isProvider: isProvider
-          ),*/
           Routes.SELECT_USER: (context) => SelectUser(onSelected: selectUser),
           Routes.LOGIN: (context) => Login(
                 isProvider: isProvider,
               ),
-          //Routes.REGISTER: (context) => const Register(context),
+          Routes.FORGOT_PASSWORD: (context) => ForgotPassword(
+                isProvider: isProvider,
+              ),
+          Routes.REGISTER: (context) => Register(isProvider: isProvider),
         },
         debugShowCheckedModeBanner: false,
       ),
