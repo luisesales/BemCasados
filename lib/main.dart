@@ -3,14 +3,17 @@ import 'package:nuptia/pages/auth/login.dart';
 import 'package:nuptia/pages/auth/selectUser.dart';
 import 'package:nuptia/pages/auth/register.dart';
 import 'package:nuptia/pages/auth/forgotPassword.dart';
+import 'package:nuptia/pages/auth/splashScreen.dart';
+import 'package:nuptia/pages/auth/welcomeScreen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:nuptia/model/userList.dart';
 import 'package:provider/provider.dart';
 import 'package:nuptia/utils/routes.dart';
+import 'dart:async';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -32,7 +35,7 @@ class _MyAppState extends State<MyApp> {
     return ChangeNotifierProvider(
       create: (context) => userList(),
       child: MaterialApp(
-        title: 'Nuptia',
+        title: 'Meu Casório Club',
         theme: ThemeData(
             fontFamily: 'Lato',
             colorScheme: ThemeData().copyWith().colorScheme.copyWith(
@@ -52,8 +55,13 @@ class _MyAppState extends State<MyApp> {
               labelLarge: TextStyle(
                   fontSize: 24, color: Color.fromRGBO(153, 53, 53, 100)),
             )),
-        home: SelectUser(onSelected: selectUser),
+        home: SplashScreen(),
         routes: {
+          Routes.WELCOME_SCREEN: (context) => WelcomeScreen(),
+          /*Routes.FORGOT_PASSWORD : (context) => ForgotPassword(
+            isProvider: isProvider
+          ),*/
+          Routes.SELECT_USER: (context) => SelectUser(onSelected: selectUser),
           Routes.LOGIN: (context) => Login(
                 isProvider: isProvider,
               ),

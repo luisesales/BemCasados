@@ -9,19 +9,22 @@ class SelectUser extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-      color: Theme.of(context).primaryColor,
-      child: Center(
-        heightFactor: MediaQuery.of(context).size.height,
-        child: Column(
-          children: [
-            Expanded(
-                flex: 1, child: SvgPicture.asset("assets/images/logo.svg")),
-            Expanded(
+      body: Container(
+        color: Theme.of(context).primaryColor,
+        child: Center(
+          heightFactor: MediaQuery.of(context).size.height,
+          child: Column(
+            children: [
+              Expanded(
+                  flex: 1, child: SvgPicture.asset("assets/images/logo.svg")),
+              Expanded(
                 flex: 3,
-                child: SvgPicture.asset(
-                    'assets/images/edited-couple-asset-2.svg')),
-            Expanded(
+                child: Image.asset(
+                  'assets/images/casal_na_moto.png',
+                  height: 220, // Aumentei o tamanho da imagem
+                ),
+              ),
+              Expanded(
                 flex: 1,
                 child: Container(
                   margin: EdgeInsets.only(left: 16, right: 16),
@@ -83,10 +86,12 @@ class SelectUser extends StatelessWidget {
                       ),
                     ],
                   ),
-                ))
-          ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
-    ));
+    );
   }
 }
