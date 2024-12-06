@@ -2,10 +2,11 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:nuptia/model/User.dart';
+import 'package:nuptia/model/user.dart';
+import 'package:flutter/cupertino.dart';
 
-class userList with ChangeNotifier {
-  final _baseUrl = 'https://ddm20242-8e4a5-default-rtdb.firebaseio.com/';
+class UserList with ChangeNotifier {
+  final _baseUrl = 'https://nuptia-c773d-default-rtdb.firebaseio.com/';
   List<User> _userList = [];
   List<User> get users {
     return [..._userList];
@@ -18,7 +19,7 @@ class userList with ChangeNotifier {
       if (response.statusCode == 200) {
         Map<String, dynamic> _userListJson = jsonDecode(response.body);
         _userListJson.forEach((id, user) {
-          users.add(user.fromJson(id, user));
+          users.add(User.fromJson(id, user));
         });
         _userList = users;
         return users;

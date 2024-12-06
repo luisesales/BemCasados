@@ -3,28 +3,76 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nuptia/model/user.dart';
 import 'package:nuptia/model/userList.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:nuptia/components/formFieldPersonal.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
   final bool isProvider;
   const Login({super.key, required this.isProvider});
 
   @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  @override
   Widget build(BuildContext context) {
-    final _users = Provider.of<userList>(
+    final _provider = Provider.of<UserList>(
       context,
       listen: true,
     );
+    late Future<List<User>> _users = _provider.fetchUsers();
     final _usernameFocus = FocusNode();
     final _passwordFocus = FocusNode();
     final _formData = Map<String, Object>();
+    bool _rememberMe = false;
 
     void setData(String input, data) {
       _formData[data] = input;
     }
 
-    void login() {}
+    _loadUserData() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      setState(() {
+        _formData['username'] = prefs.getString('email_username') ?? '';
+        _formData['password'] = prefs.getString('password') ?? '';
+        _rememberMe = prefs.getBool('remember_me') ?? false;
+      });
+    }
+
+    _saveUserData() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString('email_username', _usernameFocus.toString());
+      prefs.setString('password', _passwordFocus.toString());
+      prefs.setBool('remember_me', _rememberMe);
+    }
+
+    _clearUserData() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.remove('email_username');
+      prefs.remove('password');
+      prefs.setBool('remember_me', false);
+    }
+
+    void login() {
+      setState(() {
+        final List<User> userList = _provider.users;
+        for (int i = 0; i < userList.length; i++) {
+          if ((_formData['username'] == userList[i].username ||
+                  _formData['username'] == userList[i].email) &&
+              _formData['password'] == userList[i].password) {
+            if (_rememberMe) {
+              _saveUserData();
+            } else {
+              _clearUserData();
+            }
+            Navigator.of(context).pushNamed('/home');
+            return;
+          }
+        }
+      });
+    }
 
     return Scaffold(
       body: Container(
@@ -81,6 +129,26 @@ class Login extends StatelessWidget {
                       onReturn: (String data) {
                         setData(data, 'password');
                       },
+                    ),
+                    Container(
+                      height: 8,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Checkbox(
+                          value: _rememberMe,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              _rememberMe = value!;
+                            });
+                          },
+                        ),
+                        Text(
+                          "Lembrar de mim",
+                          style: Theme.of(context).textTheme.headlineMedium,
+                        ),
+                      ],
                     ),
                     Container(
                       height: 8,

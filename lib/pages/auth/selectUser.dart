@@ -20,7 +20,7 @@ class SelectUser extends StatelessWidget {
                 flex: 3,
                 child: Image.asset(
                   'assets/images/casal_tomando_cafe.png',
-                  height: 520,
+                  height: MediaQuery.of(context).size.height * (2 / 3),
                 ),
               ),
               Expanded(
