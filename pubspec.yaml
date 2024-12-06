@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   http: ^1.2.2
   provider: ^6.1.2
+  flutter_svg: ^2.0.16
 
 dev_dependencies:
   flutter_test:
@@ -54,8 +55,10 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-  assets:
-    - assets/images/casal_na_moto.png
+  assets: 
+  - assets/images/logo.svg  
+  - assets/images/casal_na_moto.png
+  - assets/images/casal_tomando_cafe.png
 
 
   # The following line ensures that the Material Icons font is
