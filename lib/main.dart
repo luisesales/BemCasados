@@ -31,7 +31,7 @@ class _MyAppState extends State<MyApp> {
     }
 
     return ChangeNotifierProvider(
-      create: (context) => userList(),
+      create: (context) => UserList(),
       child: MaterialApp(
         title: 'Meu Casório Club',
         theme: ThemeData(

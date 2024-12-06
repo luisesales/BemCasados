@@ -12,7 +12,7 @@ class Register extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _users = Provider.of<userList>(
+    final _users = Provider.of<UserList>(
       context,
       listen: true,
     );
