@@ -1,45 +1,64 @@
 import 'package:flutter/material.dart';
 
-class MarketplacePage extends StatelessWidget {
+class MarketplacePage extends StatefulWidget {
+  const MarketplacePage({Key? key}) : super(key: key);
+
+  @override
+  _MarketplacePageState createState() => _MarketplacePageState();
+}
+
+class _MarketplacePageState extends State<MarketplacePage> {
+  String selectedCity = 'Natal, RN'; // Cidade inicial selecionada
+
+  List<String> cities = [
+    'Natal, RN',
+    'São Paulo, SP',
+    'Rio de Janeiro, RJ',
+    'Belo Horizonte, MG',
+    'Porto Alegre, RS'
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Meu Casório Club'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {
-              // Ação para a barra de pesquisa
-            },
-          ),
-        ],
-      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Barra de pesquisa
+            // Título Marketplace
             Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: 'Buscar produtos, serviços e fornecedores',
-                  prefixIcon: Icon(Icons.search),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
+              padding:
+                  const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
+              child: Text(
+                'Marketplace',
+                style: TextStyle(
+                  fontSize: 24.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
                 ),
               ),
             ),
             // Localização do marketplace
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
               child: Row(
                 children: [
-                  Icon(Icons.location_on, color: Colors.red),
+                  Icon(Icons.location_on, color: Colors.grey[800]),
                   SizedBox(width: 8.0),
-                  Text('Natal, RN', style: TextStyle(fontSize: 16.0)),
+                  GestureDetector(
+                    onTap: () {
+                      _showCityDialog();
+                    },
+                    child: Text(
+                      selectedCity,
+                      style: TextStyle(
+                        fontSize: 16.0,
+                        color: Colors.grey[800],
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -139,6 +158,34 @@ class MarketplacePage extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  void _showCityDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Selecione a cidade'),
+          content: Container(
+            width: double.minPositive,
+            child: ListView(
+              shrinkWrap: true,
+              children: cities.map((String city) {
+                return ListTile(
+                  title: Text(city),
+                  onTap: () {
+                    setState(() {
+                      selectedCity = city;
+                    });
+                    Navigator.of(context).pop();
+                  },
+                );
+              }).toList(),
+            ),
+          ),
+        );
+      },
     );
   }
 
