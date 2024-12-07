@@ -7,6 +7,7 @@ import 'package:nuptia/widgets/WeddingCountdown.dart';
 import 'package:nuptia/widgets/CustomBottomNavigationBar.dart'; // Certifique-se de importar o widget do BottomNavigationBar
 import 'package:provider/provider.dart';
 import 'package:nuptia/model/userList.dart';
+import 'package:intl/intl.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -17,11 +18,36 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0; // índice selecionado no BottomNavigationBar
+  DateTime? weddingDate; // Variável para armazenar a data do casamento
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index; // atualiza o índice selecionado
     });
+  }
+
+  void _pickWeddingDate(BuildContext context) async {
+    final DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2100),
+    );
+
+    if (pickedDate != null && pickedDate != weddingDate) {
+      setState(() {
+        weddingDate = pickedDate;
+      });
+    }
+  }
+
+  String _calculateTimeUntilWedding(DateTime weddingDate) {
+    final now = DateTime.now();
+    final difference = weddingDate.difference(now);
+    final months = difference.inDays ~/ 30;
+    final days = difference.inDays % 30;
+    final hours = difference.inHours % 24;
+    return '$months meses, $days dias, $hours horas';
   }
 
   @override
@@ -57,14 +83,21 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             const SizedBox(height: 16.0),
-            WeddingCountdown(
-              imageUrl: 'assets/images/0008-danibruno_pw-1000x668.png',
-              title: 'Alice & Marcos',
-              onExpand: () {
-                // Lógica para expandir o card
-              },
-              onMenuTap: () {},
-            ),
+            if (weddingDate == null)
+              ElevatedButton(
+                onPressed: () => _pickWeddingDate(context),
+                child: Text('Quando será meu casamento?'),
+              )
+            else
+              WeddingCountdown(
+                imageUrl: 'assets/images/0008-danibruno_pw-1000x668.png',
+                title: 'Meu Casamento', // Ajustado para "Meu Casamento"
+                countdownText: _calculateTimeUntilWedding(weddingDate!),
+                onExpand: () {
+                  // Lógica para expandir o card
+                },
+                onMenuTap: () {},
+              ),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(

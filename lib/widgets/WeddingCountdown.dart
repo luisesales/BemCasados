@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class WeddingCountdown extends StatelessWidget {
   final String imageUrl;
   final String title;
+  final String countdownText; // Adicionado para exibir a contagem regressiva
   final VoidCallback onExpand;
   final VoidCallback onMenuTap;
 
@@ -10,6 +11,7 @@ class WeddingCountdown extends StatelessWidget {
     super.key,
     required this.imageUrl,
     required this.title,
+    required this.countdownText,
     required this.onExpand,
     required this.onMenuTap,
   });
@@ -69,7 +71,7 @@ class WeddingCountdown extends StatelessWidget {
                           ),
                         ),
                       ),
-                      // Texto "Alice & Marcos" com ícone
+                      // Texto "Meu Casamento" com ícone
                       GestureDetector(
                         onTap: onExpand,
                         child: Container(
@@ -136,26 +138,12 @@ class WeddingCountdown extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 8.0),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
-                            _CountdownItem(
-                              value: '379',
-                              label: 'DIAS',
-                            ),
-                            _CountdownItem(
-                              value: '18',
-                              label: 'HORAS',
-                            ),
-                            _CountdownItem(
-                              value: '45',
-                              label: 'MINUTOS',
-                            ),
-                            _CountdownItem(
-                              value: '19',
-                              label: 'SEGUNDOS',
-                            ),
-                          ],
+                        Text(
+                          countdownText,
+                          style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
                         ),
                       ],
                     ),
@@ -166,35 +154,6 @@ class WeddingCountdown extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-// Widget personalizado para os itens do countdown
-class _CountdownItem extends StatelessWidget {
-  final String value;
-  final String label;
-
-  const _CountdownItem({
-    required this.value,
-    required this.label,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          value,
-          style: const TextStyle(
-              fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
-        ),
-        Text(
-          label,
-          style: const TextStyle(
-              fontSize: 10, fontWeight: FontWeight.bold, color: Colors.white),
-        ),
-      ],
     );
   }
 }
