@@ -14,78 +14,67 @@ class SelectUser extends StatelessWidget {
           heightFactor: MediaQuery.of(context).size.height,
           child: ListView(
             children: [
-              Expanded(
-                  flex: 1, child: SvgPicture.asset("assets/images/logo.svg")),
-              Expanded(
-                flex: 3,
-                child: Image.asset(
-                  'assets/images/casal_tomando_cafe.png',
-                  height: MediaQuery.of(context).size.height * (2 / 3),
-                ),
+              SvgPicture.asset("assets/images/logo.svg", height: 100),
+              Image.asset(
+                'assets/images/casal_tomando_cafe.png',
+                height: MediaQuery.of(context).size.height * 2 / 3,
               ),
-              Expanded(
-                flex: 1,
-                child: Container(
-                  margin: EdgeInsets.only(top: 40, left: 16, right: 16),
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        width: double
-                            .infinity, // Isso faz o botão ocupar a linha inteira
-                        child: ElevatedButton(
-                          style: ButtonStyle(
-                            foregroundColor:
-                                WidgetStatePropertyAll(Colors.white),
-                            shape: WidgetStatePropertyAll(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16),
-                              ),
-                            ),
-                          ),
-                          onPressed: () {
-                            onSelected(false);
-                            Navigator.of(context).pushNamed('/login');
-                          },
-                          child: Padding(
-                            padding: EdgeInsets.fromLTRB(32, 16, 32, 16),
-                            child: Text(
-                              'Quero organizar meu casamento',
-                              style: Theme.of(context).textTheme.labelMedium,
+              Container(
+                margin: EdgeInsets.only(top: 40, left: 16, right: 16),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          foregroundColor:
+                              MaterialStateProperty.all(Colors.white),
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
                             ),
                           ),
                         ),
-                      ),
-                      Container(
-                        height: 16,
-                      ),
-                      SizedBox(
-                        width: double
-                            .infinity, // Isso faz o botão ocupar a linha inteira
-                        child: ElevatedButton(
-                          style: ButtonStyle(
-                            foregroundColor:
-                                WidgetStatePropertyAll(Colors.white),
-                            shape: WidgetStatePropertyAll(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16),
-                              ),
-                            ),
-                          ),
-                          onPressed: () {
-                            onSelected(true);
-                            Navigator.of(context).pushNamed('/login');
-                          },
-                          child: Padding(
-                            padding: EdgeInsets.fromLTRB(32, 16, 32, 16),
-                            child: Text(
-                              'Quero anunciar meus serviços',
-                              style: Theme.of(context).textTheme.labelMedium,
-                            ),
+                        onPressed: () {
+                          onSelected(false);
+                          Navigator.of(context).pushNamed('/login');
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.fromLTRB(32, 16, 32, 16),
+                          child: Text(
+                            'Quero organizar meu casamento',
+                            style: Theme.of(context).textTheme.labelMedium,
                           ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                    SizedBox(height: 16),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          foregroundColor:
+                              MaterialStateProperty.all(Colors.white),
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                          ),
+                        ),
+                        onPressed: () {
+                          onSelected(true);
+                          Navigator.of(context).pushNamed('/login');
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.fromLTRB(32, 16, 32, 16),
+                          child: Text(
+                            'Quero anunciar meus serviços',
+                            style: Theme.of(context).textTheme.labelMedium,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
