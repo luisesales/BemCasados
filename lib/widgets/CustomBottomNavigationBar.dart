@@ -8,9 +8,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
     Key? key,
     required this.selectedIndex,
     required this.onItemTapped,
-  }) : super(
-            key:
-                key); // o parâmetro key (não sei para que serve) é passado para o construtor do super
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
