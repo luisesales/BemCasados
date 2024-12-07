@@ -7,6 +7,7 @@ import 'package:nuptia/pages/auth/welcomeScreen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:nuptia/model/userList.dart';
+import 'package:nuptia/pages/home/home.dart';
 import 'package:provider/provider.dart';
 import 'package:nuptia/utils/routes.dart';
 
@@ -35,7 +36,7 @@ class _MyAppState extends State<MyApp> {
       child: MaterialApp(
         title: 'Meu Casório Club',
         theme: ThemeData(
-            fontFamily: 'Lato',
+            fontFamily: 'Inter',
             colorScheme: ThemeData().copyWith().colorScheme.copyWith(
                 primary: Color.fromRGBO(213, 29, 72, 100),
                 surface: Color.fromRGBO(184, 184, 184, 70)),
@@ -53,8 +54,9 @@ class _MyAppState extends State<MyApp> {
               labelLarge: TextStyle(
                   fontSize: 24, color: Color.fromRGBO(153, 53, 53, 100)),
             )),
-        home: SplashScreen(),
+        home: HomeScreen(),
         routes: {
+          Routes.HOME_SCREEN: (context) => HomeScreen(),
           Routes.WELCOME_SCREEN: (context) => WelcomeScreen(),
           Routes.SELECT_USER: (context) => SelectUser(onSelected: selectUser),
           Routes.LOGIN: (context) => Login(

@@ -5,4 +5,5 @@ class Routes {
   static const FORGOT_PASSWORD = '/forgot-password';
   static const WELCOME_SCREEN = '/welcome-screen';
   static const SPLASH_SCREEN = '/splash-screen';
+  static const HOME_SCREEN = '/home';
 }
