@@ -4,9 +4,23 @@ import 'package:nuptia/widgets/CircleCartIcon.dart';
 import 'package:nuptia/widgets/CustomAppBar.dart';
 import 'package:nuptia/widgets/MyWeddingActions.dart';
 import 'package:nuptia/widgets/WeddingCountdown.dart';
+import 'package:nuptia/widgets/CustomBottomNavigationBar.dart'; // Certifique-se de importar o widget do BottomNavigationBar
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int _selectedIndex = 0; // índice selecionado no BottomNavigationBar
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index; // atualiza o índice selecionado
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,6 +100,10 @@ class HomeScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         child: const Icon(Icons.add),
+      ),
+      bottomNavigationBar: CustomBottomNavigationBar(
+        selectedIndex: _selectedIndex,
+        onItemTapped: _onItemTapped,
       ),
     );
   }
