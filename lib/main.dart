@@ -4,7 +4,7 @@ import 'package:nuptia/pages/auth/selectUser.dart';
 import 'package:nuptia/pages/auth/register.dart';
 import 'package:nuptia/pages/auth/forgotPassword.dart';
 import 'package:nuptia/pages/auth/splashScreen.dart';
-import 'package:nuptia/pages/auth/welcomeScreen.dart';
+import 'package:nuptia/pages/auth/welcomeScreen.dart'; // Certifique-se de ter a tela de bem-vindo
 
 import 'package:nuptia/model/userList.dart';
 import 'package:nuptia/pages/home/home.dart';
@@ -38,37 +38,37 @@ class _MyAppState extends State<MyApp> {
       child: MaterialApp(
         title: 'Meu Casório Club',
         theme: ThemeData(
-          fontFamily: 'Lato',
-          colorScheme: ThemeData().colorScheme.copyWith(
+            fontFamily: 'Inter',
+            colorScheme: ThemeData().copyWith().colorScheme.copyWith(
                 primary: Color.fromRGBO(213, 29, 72, 100),
-                surface: Color.fromRGBO(184, 184, 184, 70),
-              ),
-          textTheme: TextTheme(
-            headlineSmall:
-                TextStyle(fontSize: 8, color: Color.fromRGBO(56, 31, 126, 100)),
-            headlineMedium: TextStyle(
-                fontSize: 16, color: Color.fromRGBO(56, 31, 126, 100)),
-            headlineLarge: TextStyle(
-                fontSize: 24, color: Color.fromRGBO(56, 31, 126, 100)),
-            labelSmall:
-                TextStyle(fontSize: 8, color: Color.fromRGBO(153, 53, 53, 100)),
-            labelMedium: TextStyle(
-                fontSize: 16, color: Color.fromRGBO(153, 53, 53, 100)),
-            labelLarge: TextStyle(
-                fontSize: 24, color: Color.fromRGBO(153, 53, 53, 100)),
-          ),
-        ),
-        home: SplashScreen(),
+                surface: Color.fromRGBO(184, 184, 184, 70)),
+            textTheme: TextTheme(
+              headlineSmall: TextStyle(
+                  fontSize: 8, color: Color.fromRGBO(56, 31, 126, 100)),
+              headlineMedium: TextStyle(
+                  fontSize: 16, color: Color.fromRGBO(56, 31, 126, 100)),
+              headlineLarge: TextStyle(
+                  fontSize: 24, color: Color.fromRGBO(56, 31, 126, 100)),
+              labelSmall: TextStyle(
+                  fontSize: 8, color: Color.fromRGBO(153, 53, 53, 100)),
+              labelMedium: TextStyle(
+                  fontSize: 16, color: Color.fromRGBO(153, 53, 53, 100)),
+              labelLarge: TextStyle(
+                  fontSize: 24, color: Color.fromRGBO(153, 53, 53, 100)),
+            )),
+        home: SplashScreen(), // Primeira tela é a SplashScreen
         routes: {
-          Routes.WELCOME_SCREEN: (context) => WelcomeScreen(),
+          Routes.HOME_SCREEN: (context) => HomeScreen(),
+          Routes.WELCOME_SCREEN: (context) =>
+              WelcomeScreen(), // Tela de Bem-Vindo
           Routes.SELECT_USER: (context) => SelectUser(onSelected: selectUser),
           Routes.LOGIN: (context) => Login(isProvider: isProvider),
           Routes.FORGOT_PASSWORD: (context) =>
               ForgotPassword(isProvider: isProvider),
           Routes.REGISTER: (context) => Register(isProvider: isProvider),
-          '/home': (context) => Home(), // Adicione a rota /home
-          '/login': (context) =>
-              Login(isProvider: isProvider), // Adicione a rota /login
+          '/home': (context) =>
+              HomeScreen(), // Certifique-se de que isso está correto
+          '/login': (context) => Login(isProvider: isProvider),
         },
         debugShowCheckedModeBanner: false,
       ),

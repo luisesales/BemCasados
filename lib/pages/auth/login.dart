@@ -3,6 +3,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:nuptia/components/formFieldPersonal.dart';
+import 'package:provider/provider.dart';
+import 'package:nuptia/model/userList.dart';
+import 'package:nuptia/model/user.dart';
+import 'package:nuptia/utils/routes.dart';
 
 class Login extends StatefulWidget {
   final bool isProvider;
@@ -44,16 +48,25 @@ class _LoginState extends State<Login> {
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> users = json.decode(response.body);
-        bool isValidUser = false;
+        User? loggedInUser;
 
         users.forEach((userId, userData) {
           if (userData['email'] == _formData['email'] &&
               userData['password'] == _formData['password']) {
-            isValidUser = true;
+            loggedInUser = User(
+              id: userId,
+              username: userData['username'],
+              password: userData['password'],
+              email: userData['email'],
+              isProvider: userData['isProvider'],
+            );
           }
         });
 
-        if (isValidUser) {
+        if (loggedInUser != null) {
+          final userList = Provider.of<UserList>(context, listen: false);
+          userList.setCurrentUser(loggedInUser!);
+
           Navigator.of(context).pushReplacementNamed('/home');
         } else {
           setState(() {
