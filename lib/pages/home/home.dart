@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nuptia/widgets/AppSearchBar.dart';
 import 'package:nuptia/widgets/CircleCartIcon.dart';
 import 'package:nuptia/widgets/CustomAppBar.dart';
+import 'package:nuptia/widgets/MyWeddingActions.dart';
 import 'package:nuptia/widgets/WeddingCountdown.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -47,12 +48,33 @@ class HomeScreen extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    // Seção da imagem de fundo
                     const SizedBox(height: 12.0),
-                    // Botão de ação principal
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: const Text('Ação principal'),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          MyWeddingActions(
+                              buttonLabel: "Checklist",
+                              icon: Icon(Icons.checklist),
+                              onTap: () {}),
+                          MyWeddingActions(
+                              buttonLabel: "Meus fornecedores",
+                              icon: Icon(Icons.business),
+                              onTap: () {}),
+                          MyWeddingActions(
+                              buttonLabel: "Orçamentos",
+                              icon: Icon(Icons.attach_money),
+                              onTap: () {}),
+                          MyWeddingActions(
+                              buttonLabel: "Lista de convidados",
+                              icon: Icon(Icons.group),
+                              onTap: () {}),
+                          MyWeddingActions(
+                              buttonLabel: "Lista de presentes",
+                              icon: Icon(Icons.card_giftcard),
+                              onTap: () {}),
+                        ],
+                      ),
                     ),
                   ],
                 ),
