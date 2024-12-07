@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class FormFieldPersonal extends StatelessWidget {
   final String label;
   final FocusNode node;
+  final bool hide;
   final Function(String) onReturn;
   const FormFieldPersonal({
     super.key,
     required this.label,
     required this.node,
+    required this.hide,
     required this.onReturn,
   });
 
@@ -26,7 +28,8 @@ class FormFieldPersonal extends StatelessWidget {
           ],
         ),
         TextFormField(
-          initialValue: data?.toString(),
+          initialValue: data.toString(),
+          obscureText: hide,
           decoration: InputDecoration(
             filled: true,
             fillColor: Colors.white,
@@ -60,6 +63,7 @@ class FormFieldPersonal extends StatelessWidget {
             if (form.trim().isEmpty) {
               return '${label} é obrigatório';
             }
+            print("Os dados ão válidos");
             onReturn(data);
           },
         ),

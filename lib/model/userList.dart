@@ -15,18 +15,25 @@ class UserList with ChangeNotifier {
   Future<List<User>> fetchUsers() async {
     List<User> users = [];
     try {
+      print("Vou acessar a url");
       final response = await http.get(Uri.parse('$_baseUrl/users.json'));
+      print("Acessei a url");
       if (response.statusCode == 200) {
+        print("Consegui os dados");
         Map<String, dynamic> _userListJson = jsonDecode(response.body);
         _userListJson.forEach((id, user) {
           users.add(User.fromJson(id, user));
         });
+        print(users);
+        print('\n\n\n\n[ESPAÇO PARA LER DADOS]');
         _userList = users;
         return users;
       } else {
         throw Exception("Aconteceu algum erro na requisição");
       }
     } catch (e) {
+      print("Aconteceu o erro");
+      print(e);
       throw e;
     }
   }

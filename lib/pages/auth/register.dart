@@ -70,6 +70,7 @@ class Register extends StatelessWidget {
                     FormFieldPersonal(
                       label: 'Usuário',
                       node: _usernameFocus,
+                      hide: false,
                       onReturn: (String data) {
                         setData(data, 'username');
                       },
@@ -80,6 +81,7 @@ class Register extends StatelessWidget {
                     FormFieldPersonal(
                       label: 'Email',
                       node: _emailFocus,
+                      hide: false,
                       onReturn: (String data) {
                         setData(data, 'email');
                       },
@@ -90,6 +92,7 @@ class Register extends StatelessWidget {
                     FormFieldPersonal(
                       label: 'Senha',
                       node: _passwordFocus,
+                      hide: true,
                       onReturn: (String data) {
                         setData(data, 'password');
                       },
@@ -100,6 +103,7 @@ class Register extends StatelessWidget {
                     FormFieldPersonal(
                       label: 'Confirmar Senha',
                       node: _confirmPasswordFocus,
+                      hide: true,
                       onReturn: (String data) {
                         setData(data, 'confirmPassword');
                       },

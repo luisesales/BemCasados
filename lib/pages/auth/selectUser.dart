@@ -9,9 +9,9 @@ class SelectUser extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        height: MediaQuery.of(context).size.height,
         color: Theme.of(context).primaryColor,
         child: Center(
-          heightFactor: MediaQuery.of(context).size.height,
           child: ListView(
             children: [
               Expanded(

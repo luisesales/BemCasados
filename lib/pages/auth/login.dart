@@ -28,8 +28,12 @@ class _LoginState extends State<Login> {
     final _formData = Map<String, Object>();
     bool _rememberMe = false;
 
-    void setData(String input, data) {
-      _formData[data] = input;
+    void setUsername(String input) {
+      _formData["username"] = input;
+    }
+
+    void setPassword(String input) {
+      _formData["password"] = input;
     }
 
     _loadUserData() async {
@@ -76,9 +80,9 @@ class _LoginState extends State<Login> {
 
     return Scaffold(
       body: Container(
+        height: MediaQuery.of(context).size.height,
         color: Theme.of(context).primaryColor,
         child: Center(
-          heightFactor: MediaQuery.of(context).size.height,
           child: Column(children: [
             Expanded(
                 flex: 1, child: SvgPicture.asset("assets/images/logo.svg")),
@@ -116,8 +120,9 @@ class _LoginState extends State<Login> {
                     FormFieldPersonal(
                       label: 'Usuário',
                       node: _usernameFocus,
+                      hide: false,
                       onReturn: (String data) {
-                        setData(data, 'username');
+                        setUsername(data);
                       },
                     ),
                     Container(
@@ -126,8 +131,9 @@ class _LoginState extends State<Login> {
                     FormFieldPersonal(
                       label: 'Senha',
                       node: _passwordFocus,
+                      hide: true,
                       onReturn: (String data) {
-                        setData(data, 'password');
+                        setPassword(data);
                       },
                     ),
                     Container(
