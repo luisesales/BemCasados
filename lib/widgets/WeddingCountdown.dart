@@ -5,7 +5,7 @@ class WeddingCountdown extends StatelessWidget {
   final String title;
   final String countdownText; // Adicionado para exibir a contagem regressiva
   final VoidCallback onExpand;
-  final VoidCallback onMenuTap;
+  final VoidCallback onEdit; // Callback para editar a data
 
   const WeddingCountdown({
     super.key,
@@ -13,7 +13,7 @@ class WeddingCountdown extends StatelessWidget {
     required this.title,
     required this.countdownText,
     required this.onExpand,
-    required this.onMenuTap,
+    required this.onEdit, // Adicionado
   });
 
   @override
@@ -102,21 +102,19 @@ class WeddingCountdown extends StatelessWidget {
                           ),
                         ),
                       ),
-                      // Reticências
+                      // Ícone de caneta para editar a data
                       GestureDetector(
-                        onTap: onMenuTap,
+                        onTap: onEdit,
                         child: Container(
                           padding: const EdgeInsets.all(5.0),
                           decoration: BoxDecoration(
                             color: Colors.white.withOpacity(0.5),
                             borderRadius: BorderRadius.circular(20.0),
                           ),
-                          child: const Text(
-                            '...',
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                            ),
+                          child: const Icon(
+                            Icons.edit,
+                            size: 16,
+                            color: Colors.black,
                           ),
                         ),
                       ),

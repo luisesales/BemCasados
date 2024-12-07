@@ -4,10 +4,10 @@ import 'package:nuptia/widgets/CircleCartIcon.dart';
 import 'package:nuptia/widgets/CustomAppBar.dart';
 import 'package:nuptia/widgets/MyWeddingActions.dart';
 import 'package:nuptia/widgets/WeddingCountdown.dart';
-import 'package:nuptia/widgets/CustomBottomNavigationBar.dart'; // Certifique-se de importar o widget do BottomNavigationBar
+import 'package:nuptia/widgets/CustomBottomNavigationBar.dart';
 import 'package:provider/provider.dart';
 import 'package:nuptia/model/userList.dart';
-import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -19,6 +19,12 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0; // índice selecionado no BottomNavigationBar
   DateTime? weddingDate; // Variável para armazenar a data do casamento
+
+  @override
+  void initState() {
+    super.initState();
+    _loadWeddingDate();
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -37,6 +43,22 @@ class _HomeScreenState extends State<HomeScreen> {
     if (pickedDate != null && pickedDate != weddingDate) {
       setState(() {
         weddingDate = pickedDate;
+      });
+      _saveWeddingDate(pickedDate);
+    }
+  }
+
+  void _saveWeddingDate(DateTime date) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('weddingDate', date.toIso8601String());
+  }
+
+  void _loadWeddingDate() async {
+    final prefs = await SharedPreferences.getInstance();
+    final dateString = prefs.getString('weddingDate');
+    if (dateString != null) {
+      setState(() {
+        weddingDate = DateTime.parse(dateString);
       });
     }
   }
@@ -96,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 onExpand: () {
                   // Lógica para expandir o card
                 },
-                onMenuTap: () {},
+                onEdit: () => _pickWeddingDate(context), // Editar a data
               ),
             Expanded(
               child: SingleChildScrollView(

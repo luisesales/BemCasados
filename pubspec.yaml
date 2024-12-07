@@ -37,6 +37,7 @@ dependencies:
   http: ^1.2.2
   uuid: ^4.5.1
   intl: ^0.20.1
+  shared_preferences: ^2.3.3
 
 
 
@@ -46,7 +47,6 @@ dependencies:
   
   provider: ^6.1.2
   flutter_svg: ^2.0.16
-  shared_preferences: ^2.3.3
 
 dev_dependencies:
   flutter_test:
