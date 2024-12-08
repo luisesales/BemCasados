@@ -1,13 +1,13 @@
+import 'package:nuptia/model/product.dart'; 
+
 class CartItem {
-  final String title;
-  final double price;
-  int quantity;
+  final Product product; 
+  int quantity; 
 
   CartItem({
-    required this.title,
-    required this.price,
-    this.quantity = 1,
+    required this.product,
+    this.quantity = 0, //quantidade inicial padrão
   });
 
-  double get total => price * quantity;
+  double get subtotal => product.price * quantity;
 }
