@@ -5,30 +5,31 @@ class FormFieldPersonal extends StatelessWidget {
   final FocusNode node;
   final bool hide;
   final Function(String) onReturn;
+  final String? Function(String?)? validator;
+
   const FormFieldPersonal({
     super.key,
     required this.label,
     required this.node,
     required this.hide,
     required this.onReturn,
+    this.validator,
   });
 
   @override
   Widget build(BuildContext context) {
-    String data = '';
     return Column(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Text(
-              '${label}',
+              label,
               style: TextStyle(fontSize: 16, color: Colors.white),
             ),
           ],
         ),
         TextFormField(
-          initialValue: data.toString(),
           obscureText: hide,
           decoration: InputDecoration(
             filled: true,
@@ -53,19 +54,14 @@ class FormFieldPersonal extends StatelessWidget {
             ),
           ),
           textInputAction: TextInputAction.next,
-          onFieldSubmitted: (_) {
+          onFieldSubmitted: (value) {
+            onReturn(value);
             FocusScope.of(context).requestFocus(node);
           },
-          onSaved: (dataName) => data = dataName ?? '',
-          validator: (_dataName) {
-            final form = _dataName ?? '';
-
-            if (form.trim().isEmpty) {
-              return '${label} é obrigatório';
-            }
-            print("Os dados ão válidos");
-            onReturn(data);
+          onSaved: (value) {
+            onReturn(value ?? '');
           },
+          validator: validator,
         ),
       ],
     );

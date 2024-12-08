@@ -106,3 +106,16 @@ install(DIRECTORY "${PROJECT_BUILD_DIR}/${FLUTTER_ASSET_DIR_NAME}"
 install(FILES "${AOT_LIBRARY}" DESTINATION "${INSTALL_BUNDLE_DATA_DIR}"
   CONFIGURATIONS Profile;Release
   COMPONENT Runtime)
+  cmake_minimum_required(VERSION 3.10)
+
+  project(nuptia)
+  
+  set(CMAKE_CXX_STANDARD 14)
+  
+  # Adicione a linha abaixo para desabilitar os avisos de depreciação
+  add_definitions(-D_CRT_SECURE_NO_WARNINGS)
+  
+  add_executable(nuptia main.cpp)
+  
+  # Adicione outros arquivos de código-fonte e bibliotecas conforme necessário
+  
