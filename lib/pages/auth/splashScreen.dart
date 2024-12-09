@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context)
           .primaryColor, // Atualizei a cor de fundo para #D51D48
-      body: Center(child: SvgPicture.asset("assets/images/logo.svg")),
+      body: Center(child: SvgPicture.asset("assets/images/logobc.svg")),
     );
   }
 }

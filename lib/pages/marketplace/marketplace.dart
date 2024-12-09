@@ -118,12 +118,12 @@ class _MarketplacePageState extends State<MarketplacePage> {
               child: Row(
                 children: [
                   _buildCategoryItem(
-                      'Fotografia', 'assets/icons/photo_camera.png'),
-                  _buildCategoryItem('Buffet', 'assets/icons/restaurant.png'),
+                      'Fotografia', 'assets/images/photo_camera.png'),
+                  _buildCategoryItem('Buffet', 'assets/images/restaurant.png'),
                   _buildCategoryItem(
-                      'Decoração', 'assets/icons/decoration.png'),
-                  _buildCategoryItem('Bolos', 'assets/icons/cake.png'),
-                  _buildCategoryItem('Bandas', 'assets/icons/music_band.png'),
+                      'Decoração', 'assets/images/decoration.png'),
+                  _buildCategoryItem('Bolos', 'assets/images/cake.png'),
+                  _buildCategoryItem('Bandas', 'assets/images/music_band.png'),
                 ],
               ),
             ),

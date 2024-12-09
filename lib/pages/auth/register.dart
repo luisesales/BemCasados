@@ -86,7 +86,7 @@ class _RegisterState extends State<Register> {
             children: [
               Expanded(
                 flex: 1,
-                child: SvgPicture.asset("assets/images/logo.svg"),
+                child: SvgPicture.asset("assets/images/logobc.svg"),
               ),
               Expanded(
                 flex: 4,

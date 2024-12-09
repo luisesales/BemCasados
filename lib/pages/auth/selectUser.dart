@@ -14,7 +14,7 @@ class SelectUser extends StatelessWidget {
           heightFactor: MediaQuery.of(context).size.height,
           child: ListView(
             children: [
-              SvgPicture.asset("assets/images/logo.svg", height: 100),
+              SvgPicture.asset("assets/images/logobc.svg", height: 100),
               Image.asset(
                 'assets/images/casal_tomando_cafe.png',
                 height: MediaQuery.of(context).size.height * 2 / 3,

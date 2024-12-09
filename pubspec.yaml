@@ -65,10 +65,18 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   assets: 
-  - assets/images/logo.svg  
+  - assets/images/logobc.svg  
   - assets/images/casal_na_moto.png
   - assets/images/casal_tomando_cafe.png
   - assets/images/0008-danibruno_pw-1000x668.png
+  - assets/images/wedding_dress1.jpg
+  - assets/images/wedding_dress2.jpg
+  - assets/images/wedding_dress3.jpg
+  - assets/images/photo_camera.png
+  - assets/images/restaurant.png
+  - assets/images/decoration.png
+  - assets/images/cake.png
+  - assets/images/music_band.png
 
 
   # The following line ensures that the Material Icons font is
