@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
 
 class User with ChangeNotifier {
   final String id;
@@ -6,6 +7,7 @@ class User with ChangeNotifier {
   final String password;
   final String email;
   final bool isProvider; // False significa usuário comum, true é Fornecedor
+  final List<String> favorites;
 
   User({
     required this.id,
@@ -13,6 +15,7 @@ class User with ChangeNotifier {
     required this.password,
     required this.email,
     required this.isProvider,
+    required this.favorites,
   });
 
   User.fromUser(User user)
@@ -20,15 +23,17 @@ class User with ChangeNotifier {
         username = user.username,
         password = user.password,
         email = user.email,
-        isProvider = user.isProvider;
+        isProvider = user.isProvider,
+        favorites = user.favorites;
 
-  factory User.fromJson(String id, Map<String, dynamic> json) {
+  factory User.fromJson(String id, Map<String, dynamic> Json) {
     return User(
       id: id,
-      username: json['username'],
-      password: json['password'],
-      email: json['email'],
-      isProvider: json['isProvider'] ?? false,
+      username: Json['username'],
+      password: Json['password'],
+      email: Json['email'],
+      isProvider: Json['isProvider'] ?? false,
+      favorites: List<String>.from(json.decode(Json['favorites']) ?? []),
     );
   }
   Map<String, dynamic> toJson() {
@@ -37,7 +42,8 @@ class User with ChangeNotifier {
       'username': username,
       'password': password,
       'email': email,
-      'isProvider': isProvider
+      'isProvider': isProvider,
+      'favorites': jsonEncode(favorites)
     };
     return data;
   }

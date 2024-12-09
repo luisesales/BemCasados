@@ -126,7 +126,7 @@ class _RegisterState extends State<Register> {
                           ),
                           style: ButtonStyle(
                             alignment: Alignment.centerLeft,
-                            padding: MaterialStateProperty.all<EdgeInsets>(
+                            padding: WidgetStatePropertyAll<EdgeInsets>(
                                 EdgeInsets.zero),
                           ),
                         ),
@@ -177,13 +177,12 @@ class _RegisterState extends State<Register> {
                             return null;
                           },
                         ),
-                        SizedBox(height: 8),
+                        SizedBox(height: 24),
                         ElevatedButton(
                           style: ButtonStyle(
-                            padding:
-                                MaterialStateProperty.all(EdgeInsets.all(8)),
+                            padding: WidgetStatePropertyAll(EdgeInsets.all(8)),
                             foregroundColor:
-                                MaterialStateProperty.all(Colors.white),
+                                WidgetStatePropertyAll(Colors.white),
                           ),
                           onPressed: register,
                           child: SizedBox(
@@ -197,6 +196,25 @@ class _RegisterState extends State<Register> {
                               ),
                             ),
                           ),
+                        ),
+                        SizedBox(height: 24),
+                        Column(
+                          children: [
+                            Text(
+                              "Já Possui conta?",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            TextButton(
+                              child: Text(
+                                'Logar-se',
+                                style:
+                                    Theme.of(context).textTheme.headlineMedium,
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pushNamed('/login');
+                              },
+                            ),
+                          ],
                         ),
                       ],
                     ),

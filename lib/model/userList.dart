@@ -58,7 +58,8 @@ class UserList with ChangeNotifier {
             username: user.username,
             password: user.password,
             email: user.email,
-            isProvider: user.isProvider));
+            isProvider: user.isProvider,
+            favorites: user.favorites));
         notifyListeners();
       } else {
         throw Exception("Aconteceu algum erro na requisição");
@@ -81,7 +82,8 @@ class UserList with ChangeNotifier {
             username: user.username,
             password: user.password,
             email: user.email,
-            isProvider: user.isProvider);
+            isProvider: user.isProvider,
+            favorites: user.favorites);
         _userList.remove(user);
         _userList.add(newUser);
         notifyListeners();
@@ -96,14 +98,18 @@ class UserList with ChangeNotifier {
   Future<void> saveUser(Map<String, dynamic> data) {
     bool hasId = data['id'] != null;
     final user = User(
-        id: hasId
-            ? (data['id'] as String?) ?? Random().nextDouble().toString()
-            : Random().nextDouble().toString(),
-        username: (data['username'] as String?) ?? 'New User',
-        password: (data['password'] as String) ??
-            Random().nextInt(10 ^ 50).toString(),
-        email: (data['email'] as String) ?? 'New Email',
-        isProvider: (data['isProvider'] as bool?) ?? false);
+      id: hasId
+          ? (data['id'] as String?) ?? Random().nextDouble().toString()
+          : Random().nextDouble().toString(),
+      username: (data['username'] as String?) ?? 'New User',
+      password:
+          (data['password'] as String) ?? Random().nextInt(100000).toString(),
+      email: (data['email'] as String) ?? 'New Email',
+      isProvider: (data['isProvider'] as bool?) ?? false,
+      favorites: (data['favorites'] as List<String>? ?? [])
+          .map((e) => e as String)
+          .toList(),
+    );
     if (hasId) {
       return updateUser(user);
     } else {

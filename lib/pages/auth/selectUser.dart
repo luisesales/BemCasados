@@ -14,7 +14,7 @@ class SelectUser extends StatelessWidget {
         child: Center(
           child: ListView(
             children: [
-              SvgPicture.asset("assets/images/logo.svg", height: 100),
+              SvgPicture.asset("assets/images/logo.svg"),
               Image.asset(
                 'assets/images/casal_tomando_cafe.png',
                 height: MediaQuery.of(context).size.height * 2 / 3,
@@ -27,9 +27,8 @@ class SelectUser extends StatelessWidget {
                       width: double.infinity,
                       child: ElevatedButton(
                         style: ButtonStyle(
-                          foregroundColor:
-                              MaterialStateProperty.all(Colors.white),
-                          shape: MaterialStateProperty.all(
+                          foregroundColor: WidgetStatePropertyAll(Colors.white),
+                          shape: WidgetStatePropertyAll(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(16),
                             ),
@@ -53,9 +52,8 @@ class SelectUser extends StatelessWidget {
                       width: double.infinity,
                       child: ElevatedButton(
                         style: ButtonStyle(
-                          foregroundColor:
-                              MaterialStateProperty.all(Colors.white),
-                          shape: MaterialStateProperty.all(
+                          foregroundColor: WidgetStatePropertyAll(Colors.white),
+                          shape: WidgetStatePropertyAll(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(16),
                             ),
