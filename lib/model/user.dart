@@ -8,6 +8,7 @@ class User with ChangeNotifier {
   final String email;
   final bool isProvider; // False significa usuário comum, true é Fornecedor
   final List<String> favorites;
+  final List<String> cart;
 
   User({
     required this.id,
@@ -16,6 +17,7 @@ class User with ChangeNotifier {
     required this.email,
     required this.isProvider,
     required this.favorites,
+    required this.cart,
   });
 
   User.fromUser(User user)
@@ -24,7 +26,8 @@ class User with ChangeNotifier {
         password = user.password,
         email = user.email,
         isProvider = user.isProvider,
-        favorites = user.favorites;
+        favorites = user.favorites,
+        cart = user.cart;
 
   factory User.fromJson(String id, Map<String, dynamic> Json) {
     return User(
@@ -34,6 +37,7 @@ class User with ChangeNotifier {
       email: Json['email'],
       isProvider: Json['isProvider'] ?? false,
       favorites: List<String>.from(json.decode(Json['favorites']) ?? []),
+      cart: List<String>.from(json.decode(Json['favorites']) ?? []),
     );
   }
   Map<String, dynamic> toJson() {
@@ -43,7 +47,8 @@ class User with ChangeNotifier {
       'password': password,
       'email': email,
       'isProvider': isProvider,
-      'favorites': jsonEncode(favorites)
+      'favorites': jsonEncode(favorites),
+      'cart': jsonEncode(cart)
     };
     return data;
   }

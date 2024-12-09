@@ -8,6 +8,7 @@ import 'package:nuptia/pages/auth/welcomeScreen.dart'; // Certifique-se de ter a
 
 import 'package:nuptia/model/userList.dart';
 import 'package:nuptia/pages/home/home.dart';
+import 'package:nuptia/pages/home/cart.dart';
 import 'package:nuptia/pages/marketplace/marketplace.dart'; // Importando a página do marketplace
 import 'package:provider/provider.dart';
 import 'package:nuptia/utils/routes.dart';

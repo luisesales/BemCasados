@@ -12,9 +12,8 @@ class Cart extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Carrinho'),
-        backgroundColor: Colors.pink,
-      ),
+          title: const Text('Carrinho'),
+          backgroundColor: Theme.of(context).primaryColor),
       body: Column(
         children: [
           Container(
@@ -38,7 +37,7 @@ class Cart extends StatelessWidget {
                 Text(
                   'R\$ ${productList.total.toStringAsFixed(2)}', // mostra o total formatado
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -87,8 +86,8 @@ class Cart extends StatelessWidget {
                   );
                 },
                 child: const Text(
-                  'Finalizar Compra',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  'Finalizar Orçamento',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ),
             ),

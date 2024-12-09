@@ -6,7 +6,8 @@
             "password" : "testing123",
             "email" : "luis@testing.com" ,
             "isProvider" : false, 
-            "favorites" : ["p1"]
+            "favorites" : ["p1"],
+            "cart" : ["p1", "p2"]
         },
         "u2" : {
             "id" : "u2",
@@ -14,7 +15,8 @@
             "password" : "testing321",
             "email" : "victor@testing.com" ,
             "isProvider" : false ,
-            "favorites" : ["p1", "p2"]
+            "favorites" : ["p1", "p2"],
+            "cart" : ["p1", "p2", "p3"]
         },
         "u3" : {
             "id" : "u3",
@@ -22,7 +24,8 @@
             "password" : "testing231",
             "email" : "ellen@testing.com" ,
             "isProvider" : false, 
-            "favorites" : ["p1", "p2"]
+            "favorites" : ["p1", "p2"],
+            "cart" : ["p1", "p2", "p3"]
         }
     }
 }

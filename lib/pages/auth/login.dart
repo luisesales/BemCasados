@@ -58,7 +58,8 @@ class _LoginState extends State<Login> {
                 password: userData['password'],
                 email: userData['email'],
                 isProvider: userData['isProvider'],
-                favorites: userData['favorites']);
+                favorites: userData['favorites'],
+                cart: userData['cart']);
           }
         });
 

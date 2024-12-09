@@ -59,7 +59,8 @@ class UserList with ChangeNotifier {
             password: user.password,
             email: user.email,
             isProvider: user.isProvider,
-            favorites: user.favorites));
+            favorites: user.favorites,
+            cart: user.cart));
         notifyListeners();
       } else {
         throw Exception("Aconteceu algum erro na requisição");
@@ -83,7 +84,8 @@ class UserList with ChangeNotifier {
             password: user.password,
             email: user.email,
             isProvider: user.isProvider,
-            favorites: user.favorites);
+            favorites: user.favorites,
+            cart: user.favorites);
         _userList.remove(user);
         _userList.add(newUser);
         notifyListeners();
@@ -106,7 +108,8 @@ class UserList with ChangeNotifier {
           (data['password'] as String) ?? Random().nextInt(100000).toString(),
       email: (data['email'] as String) ?? 'New Email',
       isProvider: (data['isProvider'] as bool?) ?? false,
-      favorites: (data['favorites'] as List<String>? ?? [])
+      favorites: (data['favorites'] as List<String>? ?? []),
+      cart: (data['cart'] as List<String>? ?? [])
           .map((e) => e as String)
           .toList(),
     );
