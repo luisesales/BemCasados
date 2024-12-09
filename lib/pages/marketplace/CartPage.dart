@@ -1,28 +1,58 @@
 import 'package:flutter/material.dart';
-import 'package:nuptia/model/CartItem.dart';
+import 'package:nuptia/model/cartItem.dart';
+import 'package:nuptia/widgets/cartItemWidget.dart';
 
 class CartPage extends StatefulWidget {
-  final List<CartItem> cartItems;
+  final List<CartItem> cartItems; 
 
-  const CartPage({Key? key, required this.cartItems}) : super(key: key);
+  const CartPage({
+    Key? key,
+    required this.cartItems,
+  }) : super(key: key);
 
   @override
   _CartPageState createState() => _CartPageState();
 }
 
 class _CartPageState extends State<CartPage> {
+  // Função para incrementar a quantidade de um item
+  void _incrementQuantity(CartItem item) {
+    setState(() {
+      item.quantity++;
+    });
+  }
+
+  // Função para decrementar a quantidade de um item
+  void _decrementQuantity(CartItem item) {
+    setState(() {
+      if (item.quantity > 1) item.quantity--;
+    });
+  }
+
+  // Função para remover um item do carrinho
+  void _removeItem(CartItem item) {
+    setState(() {
+      widget.cartItems.remove(item);
+    });
+  }
+
+  // Calcula o preço total do carrinho
+  double get totalPrice =>
+      widget.cartItems.fold(0, (total, item) => total + item.subtotal);
+
   @override
   Widget build(BuildContext context) {
-    double totalAmount = widget.cartItems.fold(
-        0.0, (sum, item) => sum + item.total);
-
     return Scaffold(
       appBar: AppBar(
         title: const Text("Carrinho"),
-        backgroundColor: Colors.pink,
       ),
       body: widget.cartItems.isEmpty
-          ? Center(child: Text("Seu carrinho está vazio!"))
+          ? const Center(
+              child: Text(
+                "Seu carrinho está vazio.",
+                style: TextStyle(fontSize: 16.0, color: Colors.grey),
+              ),
+            )
           : Column(
               children: [
                 Expanded(
@@ -30,57 +60,36 @@ class _CartPageState extends State<CartPage> {
                     itemCount: widget.cartItems.length,
                     itemBuilder: (context, index) {
                       final item = widget.cartItems[index];
-                      return Card(
-                        margin:
-                            const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-                        child: ListTile(
-                          title: Text(item.title),
-                          subtitle: Text("R\$ ${item.price.toStringAsFixed(2)} x ${item.quantity}"),
-                          trailing: Text("R\$ ${item.total.toStringAsFixed(2)}"),
-                          leading: IconButton(
-                            icon: Icon(Icons.remove_circle),
-                            color: Colors.red,
-                            onPressed: () {
-                              setState(() {
-                                widget.cartItems.removeAt(index);
-                              });
-                            },
-                          ),
-                        ),
+                      return CartItemWidget(
+                        cartItem: item,
+                        onIncrement: () => _incrementQuantity(item),
+                        onDecrement: () => _decrementQuantity(item),
+                        onRemove: () => _removeItem(item),
                       );
                     },
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: Column(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Total: R\$ ${totalAmount.toStringAsFixed(2)}",
-                        style: TextStyle(
-                          fontSize: 20.0,
+                        "Total: R\$ ${totalPrice.toStringAsFixed(2)}",
+                        style: const TextStyle(
+                          fontSize: 18.0,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 8.0),
                       ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.pink,
-                        padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
-                        ),
-                      onPressed: () {
-                          // Placeholder para finalizar a compra
+                        onPressed: () {
+                          // Ação ao finalizar a compra
                         },
-                      child: const Text(
-                          "Finalizar Compra",
-                          style: TextStyle(
-                          color: Colors.white, // Define a cor do texto como branco
-                          ),
+                        child: const Text("Finalizar Compra"),
                       ),
-                    ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
     );
