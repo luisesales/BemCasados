@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class MarketplacePage extends StatefulWidget {
   const MarketplacePage({Key? key}) : super(key: key);
@@ -8,7 +9,7 @@ class MarketplacePage extends StatefulWidget {
 }
 
 class _MarketplacePageState extends State<MarketplacePage> {
-  String selectedCity = 'Natal, RN'; // Cidade inicial selecionada
+  String selectedCity = 'Natal, RN';
 
   List<String> cities = [
     'Natal, RN',
@@ -18,6 +19,23 @@ class _MarketplacePageState extends State<MarketplacePage> {
     'Porto Alegre, RS'
   ];
 
+  final List<Map<String, String>> articles = [
+    {
+      'title':
+          'Casamento às Cegas: Brasil - O reality show que está lançando tendência no mercado de casamentos',
+      'image': 'assets/images/wedding_show.jpg',
+    },
+    {
+      'title': 'Ideias de decorações de casamento inspiradoras para 2024',
+      'image': 'assets/images/wedding_decor.jpg',
+    },
+    {
+      'title':
+          'Tendências de vestidos de noiva: Estilos para arrasar no seu grande dia',
+      'image': 'assets/images/honeymoon.jpg',
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,10 +43,8 @@ class _MarketplacePageState extends State<MarketplacePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Título Marketplace
             Padding(
-              padding:
-                  const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
+              padding: const EdgeInsets.all(16.0),
               child: Text(
                 'Marketplace',
                 style: TextStyle(
@@ -38,18 +54,14 @@ class _MarketplacePageState extends State<MarketplacePage> {
                 ),
               ),
             ),
-            // Localização do marketplace
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              padding: const EdgeInsets.all(16.0),
               child: Row(
                 children: [
                   Icon(Icons.location_on, color: Colors.grey[800]),
                   SizedBox(width: 8.0),
                   GestureDetector(
-                    onTap: () {
-                      _showCityDialog();
-                    },
+                    onTap: _showCityDialog,
                     child: Text(
                       selectedCity,
                       style: TextStyle(
@@ -63,48 +75,54 @@ class _MarketplacePageState extends State<MarketplacePage> {
               ),
             ),
             SizedBox(height: 16.0),
-            // Artigo em destaque
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 16.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    blurRadius: 6,
-                    offset: Offset(0, 3),
-                  ),
-                ],
-                image: DecorationImage(
-                  image: AssetImage('assets/images/wedding_show.jpg'),
-                  fit: BoxFit.cover,
-                ),
+
+            // Carrossel de Artigos
+            CarouselSlider(
+              options: CarouselOptions(
+                height: 200.0,
+                autoPlay: true,
+                enlargeCenterPage: true,
               ),
-              height: 200.0,
-              child: Align(
-                alignment: Alignment.bottomLeft,
-                child: Container(
-                  padding: const EdgeInsets.all(8.0),
-                  decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.5),
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(10.0),
-                      bottomRight: Radius.circular(10.0),
-                    ),
-                  ),
-                  child: Text(
-                    'Casamento às Cegas: Brasil - O reality show que está lançando tendência no mercado de casamentos',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
+              items: articles.map((article) {
+                return Builder(
+                  builder: (BuildContext context) {
+                    return Container(
+                      margin: EdgeInsets.symmetric(horizontal: 8.0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
+                        image: DecorationImage(
+                          image: AssetImage(article['image']!),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      child: Align(
+                        alignment: Alignment.bottomLeft,
+                        child: Container(
+                          padding: const EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.5),
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(10.0),
+                              bottomRight: Radius.circular(10.0),
+                            ),
+                          ),
+                          child: Text(
+                            article['title']!,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                );
+              }).toList(),
             ),
+
             SizedBox(height: 16.0),
-            // Navegação por categorias
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
@@ -128,7 +146,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
               ),
             ),
             SizedBox(height: 16.0),
-            // Itens em destaque
+
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
@@ -137,6 +155,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
               ),
             ),
             SizedBox(height: 8.0),
+
             _buildFeaturedItem(
               'Vestido de noiva R\$ 700',
               'Natal, Pitimbu',
@@ -259,21 +278,11 @@ class _MarketplacePageState extends State<MarketplacePage> {
                     ),
                   ),
                   SizedBox(height: 4.0),
-                  Text(
-                    location,
-                    style: TextStyle(
-                      color: Colors.white70,
-                      fontSize: 14.0,
-                    ),
-                  ),
+                  Text(location,
+                      style: TextStyle(color: Colors.white70, fontSize: 14.0)),
                   SizedBox(height: 4.0),
-                  Text(
-                    date,
-                    style: TextStyle(
-                      color: Colors.white70,
-                      fontSize: 14.0,
-                    ),
-                  ),
+                  Text(date,
+                      style: TextStyle(color: Colors.white70, fontSize: 14.0)),
                 ],
               ),
             ),

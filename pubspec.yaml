@@ -38,6 +38,7 @@ dependencies:
   uuid: ^4.5.1
   intl: ^0.20.1
   shared_preferences: ^2.3.3
+  carousel_slider: ^5.0.0
 
 
 
@@ -72,6 +73,9 @@ flutter:
   - assets/images/wedding_dress1.jpg
   - assets/images/wedding_dress2.jpg
   - assets/images/wedding_dress3.jpg
+  - assets/images/wedding_decor.jpg
+  - assets/images/honeymoon.jpg
+  - assets/images/wedding_show.jpg
   - assets/images/photo_camera.png
   - assets/images/restaurant.png
   - assets/images/decoration.png
