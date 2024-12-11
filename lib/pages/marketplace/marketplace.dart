@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MarketplacePage extends StatefulWidget {
   const MarketplacePage({Key? key}) : super(key: key);
@@ -19,10 +20,27 @@ class _MarketplacePageState extends State<MarketplacePage> {
     'Porto Alegre, RS'
   ];
 
-  List<String> carouselImages = [
-    'https://th.bing.com/th/id/OIP.3_jwpl8Zomluk8nLX_SnxwHaE8?rs=1&pid=ImgDetMain',
-    'https://th.bing.com/th/id/R.20fd6b80bad8902d27605bf48c71f463?rik=Da1dToFgH2EmQA&pid=ImgRaw&r=0',
-    'https://th.bing.com/th/id/R.5bf141e64a12be3e370031339ccbd01d?rik=b8Bc2VutR1H56Q&pid=ImgRaw&r=0'
+  List<Map<String, String>> carouselArticles = [
+    {
+      'title': 'Como planejar seu casamento perfeito',
+      'image':
+          'https://th.bing.com/th/id/OIP.3_jwpl8Zomluk8nLX_SnxwHaE8?rs=1&pid=ImgDetMain',
+      'link':
+          'https://www.casamentos.com.br/artigos/organizar-um-casamento-passo-a-passo--c2466',
+    },
+    {
+      'title': 'Tendências de decoração para casamentos',
+      'image':
+          'https://th.bing.com/th/id/R.20fd6b80bad8902d27605bf48c71f463?rik=Da1dToFgH2EmQA&pid=ImgRaw&r=0',
+      'link':
+          'https://www.casamentos.com.br/artigos/tendencias-casamento-2022--c9716',
+    },
+    {
+      'title': 'Os 20 destinos de lua de mel mais desejados do mundo!',
+      'image':
+          'https://th.bing.com/th/id/R.5bf141e64a12be3e370031339ccbd01d?rik=b8Bc2VutR1H56Q&pid=ImgRaw&r=0',
+      'link': 'https://www.melhoresdestinos.com.br/destinos-de-lua-de-mel.html',
+    },
   ];
 
   @override
@@ -72,16 +90,61 @@ class _MarketplacePageState extends State<MarketplacePage> {
             SizedBox(height: 16.0),
             // Carrossel de artigos
             CarouselSlider(
-              items: carouselImages.map((url) {
-                return Container(
-                  margin: EdgeInsets.symmetric(horizontal: 8.0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.0),
-                    image: DecorationImage(
-                      image: NetworkImage(url),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+              items: carouselArticles.map((article) {
+                return Builder(
+                  builder: (BuildContext context) {
+                    return GestureDetector(
+                      onTap: () async {
+                        final url = Uri.parse(article['link']!);
+                        if (await canLaunch(url.toString())) {
+                          // Usando canLaunch com URL como String
+                          launch(url
+                              .toString()); // Usando launch com URL como String
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Não foi possível abrir o link'),
+                            ),
+                          );
+                        }
+                      },
+                      child: Container(
+                        margin: EdgeInsets.symmetric(horizontal: 8.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.0),
+                          image: DecorationImage(
+                            image: NetworkImage(article['image']!),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        child: Stack(
+                          children: [
+                            Positioned.fill(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.black.withOpacity(0.5),
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              bottom: 16.0,
+                              left: 16.0,
+                              right: 16.0,
+                              child: Text(
+                                article['title']!,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
                 );
               }).toList(),
               options: CarouselOptions(
