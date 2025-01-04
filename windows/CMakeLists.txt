@@ -1,10 +1,10 @@
 # Project-level configuration.
 cmake_minimum_required(VERSION 3.14)
-project(nuptia LANGUAGES CXX)
+project(BemCasdos LANGUAGES CXX)
 
 # The name of the executable created for the application. Change this to change
 # the on-disk name of your application.
-set(BINARY_NAME "nuptia")
+set(BINARY_NAME "BemCasdos")
 
 # Explicitly opt in to modern CMake behaviors to avoid warnings with recent
 # versions of CMake.
@@ -108,14 +108,14 @@ install(FILES "${AOT_LIBRARY}" DESTINATION "${INSTALL_BUNDLE_DATA_DIR}"
   COMPONENT Runtime)
   cmake_minimum_required(VERSION 3.10)
 
-  project(nuptia)
+  project(BemCasdos)
   
   set(CMAKE_CXX_STANDARD 14)
   
   # Adicione a linha abaixo para desabilitar os avisos de depreciação
   add_definitions(-D_CRT_SECURE_NO_WARNINGS)
   
-  add_executable(nuptia main.cpp)
+  add_executable(BemCasdos main.cpp)
   
   # Adicione outros arquivos de código-fonte e bibliotecas conforme necessário
   

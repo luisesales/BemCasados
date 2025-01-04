@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "nuptia" "\0"
+            VALUE "FileDescription", "BemCasdos" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "nuptia" "\0"
+            VALUE "InternalName", "BemCasdos" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2024 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "nuptia.exe" "\0"
-            VALUE "ProductName", "nuptia" "\0"
+            VALUE "OriginalFilename", "BemCasdos.exe" "\0"
+            VALUE "ProductName", "BemCasdos" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

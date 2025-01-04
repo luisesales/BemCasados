@@ -1,4 +1,4 @@
-# nuptia
+# BemCasdos
 
 Um aplicativo de planejamento orçamentário para casamentos. v2.0
  
