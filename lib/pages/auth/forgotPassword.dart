@@ -1,5 +1,5 @@
-import 'package:nuptia/components/formFieldPersonal.dart';
-import 'package:nuptia/model/userList.dart';
+import 'package:BemCasados/components/formFieldPersonal.dart';
+import 'package:BemCasados/model/userList.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';

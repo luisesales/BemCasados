@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:nuptia/widgets/AppSearchBar.dart';
-import 'package:nuptia/widgets/CircleCartIcon.dart';
-import 'package:nuptia/widgets/CustomAppBar.dart';
-import 'package:nuptia/widgets/MyWeddingActions.dart';
-import 'package:nuptia/widgets/WeddingCountdown.dart';
-import 'package:nuptia/widgets/CustomBottomNavigationBar.dart';
+import 'package:BemCasados/widgets/AppSearchBar.dart';
+import 'package:BemCasados/widgets/CircleCartIcon.dart';
+import 'package:BemCasados/widgets/CustomAppBar.dart';
+import 'package:BemCasados/widgets/MyWeddingActions.dart';
+import 'package:BemCasados/widgets/WeddingCountdown.dart';
+import 'package:BemCasados/widgets/CustomBottomNavigationBar.dart';
 import 'package:provider/provider.dart';
-import 'package:nuptia/model/userList.dart';
+import 'package:BemCasados/model/userList.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:nuptia/pages/marketplace/marketplace.dart'; // Importar a página do marketplace
+import 'package:BemCasados/pages/marketplace/marketplace.dart'; // Importar a página do marketplace
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

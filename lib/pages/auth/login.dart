@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:nuptia/components/formFieldPersonal.dart';
+import 'package:BemCasados/components/formFieldPersonal.dart';
 import 'package:provider/provider.dart';
-import 'package:nuptia/model/userList.dart';
-import 'package:nuptia/model/user.dart';
+import 'package:BemCasados/model/userList.dart';
+import 'package:BemCasados/model/user.dart';
 
 class Login extends StatefulWidget {
   final bool isProvider;
@@ -149,26 +149,6 @@ class _LoginState extends State<Login> {
                           onReturn: (String data) {
                             setData(data, 'password');
                           },
-                        ),
-                        Container(
-                          height: 8,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Checkbox(
-                              value: _rememberMe,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  _rememberMe = value ?? false;
-                                });
-                              },
-                            ),
-                            Text(
-                              "Lembrar de mim",
-                              style: Theme.of(context).textTheme.headlineMedium,
-                            ),
-                          ],
                         ),
                         SizedBox(height: 8),
                         TextButton(

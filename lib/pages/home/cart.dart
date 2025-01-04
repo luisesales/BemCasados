@@ -1,4 +1,4 @@
-import 'package:nuptia/model/productList.dart';
+import 'package:BemCasados/model/productList.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

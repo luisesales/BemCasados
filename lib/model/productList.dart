@@ -1,13 +1,13 @@
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:nuptia/model/user.dart';
-import 'package:nuptia/model/product.dart';
+import 'package:BemCasados/model/user.dart';
+import 'package:BemCasados/model/product.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
-class Cart with ChangeNotifier {
+class ProductList with ChangeNotifier {
   final _baseUrl = 'https://bemcasados-a6b2b-default-rtdb.firebaseio.com/';
 
   bool _showFavoriteOnly = false;

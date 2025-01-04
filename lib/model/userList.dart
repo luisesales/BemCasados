@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:nuptia/model/user.dart';
+import 'package:BemCasados/model/user.dart';
 import 'package:flutter/cupertino.dart';
 
 class UserList with ChangeNotifier {

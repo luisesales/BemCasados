@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:nuptia/pages/auth/login.dart';
-import 'package:nuptia/pages/auth/selectUser.dart';
-import 'package:nuptia/pages/auth/register.dart';
-import 'package:nuptia/pages/auth/forgotPassword.dart';
-import 'package:nuptia/pages/auth/splashScreen.dart';
-import 'package:nuptia/pages/auth/welcomeScreen.dart'; // Certifique-se de ter a tela de bem-vindo
+import 'package:BemCasados/pages/auth/login.dart';
+import 'package:BemCasados/pages/auth/selectUser.dart';
+import 'package:BemCasados/pages/auth/register.dart';
+import 'package:BemCasados/pages/auth/forgotPassword.dart';
+import 'package:BemCasados/pages/auth/splashScreen.dart';
+import 'package:BemCasados/pages/auth/welcomeScreen.dart'; // Certifique-se de ter a tela de bem-vindo
 
-import 'package:nuptia/model/userList.dart';
-import 'package:nuptia/pages/home/home.dart';
-import 'package:nuptia/pages/home/cart.dart';
-import 'package:nuptia/pages/marketplace/marketplace.dart'; // Importando a página do marketplace
+import 'package:BemCasados/model/userList.dart';
+import 'package:BemCasados/pages/home/home.dart';
+import 'package:BemCasados/pages/home/cart.dart';
+import 'package:BemCasados/pages/marketplace/marketplace.dart'; // Importando a página do marketplace
 import 'package:provider/provider.dart';
-import 'package:nuptia/utils/routes.dart';
+import 'package:BemCasados/utils/routes.dart';
 
 void main() {
   runApp(const MyApp());
