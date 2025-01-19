@@ -5,7 +5,7 @@ import 'package:BemCasados/pages/auth/register.dart';
 import 'package:BemCasados/pages/auth/forgotPassword.dart';
 import 'package:BemCasados/pages/auth/splashScreen.dart';
 import 'package:BemCasados/pages/auth/welcomeScreen.dart'; // Certifique-se de ter a tela de bem-vindo
-import 'package:BemCasados/pages/create_product_page.dart'; // Certifique-se de ter a tela de bem-vindo
+import 'package:BemCasados/pages/create_product_screen.dart'; // Certifique-se de ter a tela de bem-vindo
 
 import 'package:BemCasados/model/userList.dart';
 import 'package:BemCasados/pages/home/home.dart';
@@ -72,7 +72,7 @@ class _MyAppState extends State<MyApp> {
           Routes.REGISTER: (context) => Register(isProvider: isProvider),
           Routes.MARKETPLACE_SCREEN: (context) =>
               MarketplacePage(), // Rota para MarketplacePage
-          Routes.PRODUCT_FORM: (context) => CreateProductPage(),
+          Routes.PRODUCT_FORM: (context) => CreateProductScreen(),
         },
         debugShowCheckedModeBanner: false,
       ),

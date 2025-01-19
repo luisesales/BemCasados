@@ -5,6 +5,7 @@ class Product {
   final String id;
   final double price;
   final String title;
+  final String description;
   final ProductLocation? location;
   final File image;
   final String phone;
@@ -14,6 +15,7 @@ class Product {
     required this.id,
     required this.price,
     required this.title,
+    required this.description,
     this.location,
     required this.image,
     required this.phone,

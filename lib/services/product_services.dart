@@ -7,6 +7,7 @@ class ProductService {
   Future<void> addProduct({
     required String id,
     required String title,
+    required String description,
     required double price,
     required String phone,
     required String email,
@@ -18,6 +19,7 @@ class ProductService {
     try {
       await _dbRef.child('products/$id').set({
         'title': title,
+        'description': description,
         'price': price,
         'phone': phone,
         'email': email,

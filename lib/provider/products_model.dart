@@ -25,11 +25,12 @@ class ProductsModel with ChangeNotifier {
   }
 
   // parâmetro de localização adicionado
-  void addProduct(String title, double price, String phone, String email,
-      File img, ProductLocation location) async {
+  void addProduct(String title, String description, double price, String phone,
+      String email, File img, ProductLocation location) async {
     final newProduct = Product(
         id: Random().nextDouble().toString(),
         title: title,
+        description: description,
         price: price,
         phone: phone,
         email: email,
@@ -41,6 +42,7 @@ class ProductsModel with ChangeNotifier {
     DbUtil.insert('places', {
       'id': newProduct.id,
       'title': newProduct.title,
+      'description': newProduct.description,
       'price': newProduct.price,
       'phone': newProduct.phone,
       'email': newProduct.email,
@@ -53,6 +55,7 @@ class ProductsModel with ChangeNotifier {
     await _productService.addProduct(
       id: newProduct.id,
       title: newProduct.title,
+      description: newProduct.description,
       price: newProduct.price,
       phone: newProduct.phone,
       email: newProduct.email,
@@ -82,6 +85,7 @@ class ProductsModel with ChangeNotifier {
           (item) => Product(
             id: item['id'],
             title: item['title'],
+            description: item['description'],
             price: item['price'],
             phone: item['phone'],
             email: item['email'],
