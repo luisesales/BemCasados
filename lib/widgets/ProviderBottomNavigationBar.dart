@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class CustomBottomNavigationBar extends StatelessWidget {
+class ProviderBottomNavigationBar extends StatelessWidget {
   final int selectedIndex;
   final Function(int) onItemTapped;
 
-  const CustomBottomNavigationBar({
+  const ProviderBottomNavigationBar({
     Key? key,
     required this.selectedIndex,
     required this.onItemTapped,
@@ -23,8 +23,8 @@ class CustomBottomNavigationBar extends StatelessWidget {
         BottomNavigationBarItem(
             icon: Icon(Icons.store, color: Colors.black), label: 'Marketplace'),
         BottomNavigationBarItem(
-            icon: Icon(Icons.card_giftcard, color: Colors.black),
-            label: 'Presentes'),
+            icon: Icon(Icons.add, color: Colors.black),
+            label: 'Postar anúncio'),
         BottomNavigationBarItem(
             icon: Icon(Icons.person, color: Colors.black), label: 'Usuário'),
       ],

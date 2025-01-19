@@ -37,7 +37,7 @@ class _MyAppState extends State<MyApp> {
     return ChangeNotifierProvider(
       create: (context) => UserList(),
       child: MaterialApp(
-        title: 'Meu Casório Club',
+        title: 'Bem Casados',
         theme: ThemeData(
             fontFamily: 'Inter',
             colorScheme: ThemeData().copyWith().colorScheme.copyWith(
@@ -57,7 +57,7 @@ class _MyAppState extends State<MyApp> {
               labelLarge: TextStyle(
                   fontSize: 24, color: Color.fromRGBO(153, 53, 53, 100)),
             )),
-        home: SplashScreen(), // Primeira tela é a SplashScreen
+        home: SplashScreen(),
         routes: {
           Routes.HOME_SCREEN: (context) => HomeScreen(),
           Routes.WELCOME_SCREEN: (context) =>
@@ -67,8 +67,7 @@ class _MyAppState extends State<MyApp> {
           Routes.FORGOT_PASSWORD: (context) =>
               ForgotPassword(isProvider: isProvider),
           Routes.REGISTER: (context) => Register(isProvider: isProvider),
-          '/home': (context) =>
-              HomeScreen(), // Certifique-se de que isso está correto
+          '/home': (context) => HomeScreen(),
           '/login': (context) => Login(isProvider: isProvider),
           '/marketplace': (context) =>
               MarketplacePage(), // Rota para MarketplacePage

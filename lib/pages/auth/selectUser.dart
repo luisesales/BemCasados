@@ -28,8 +28,8 @@ class SelectUser extends StatelessWidget {
                       child: ElevatedButton(
                         style: ButtonStyle(
                           foregroundColor:
-                              MaterialStateProperty.all(Colors.white),
-                          shape: MaterialStateProperty.all(
+                              WidgetStateProperty.all(Colors.white),
+                          shape: WidgetStateProperty.all(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(16),
                             ),
@@ -54,8 +54,8 @@ class SelectUser extends StatelessWidget {
                       child: ElevatedButton(
                         style: ButtonStyle(
                           foregroundColor:
-                              MaterialStateProperty.all(Colors.white),
-                          shape: MaterialStateProperty.all(
+                              WidgetStateProperty.all(Colors.white),
+                          shape: WidgetStateProperty.all(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(16),
                             ),

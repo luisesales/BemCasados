@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:nuptia/widgets/AppSearchBar.dart';
-import 'package:nuptia/widgets/CircleCartIcon.dart';
+import 'package:nuptia/pages/provider/create_post_page.dart';
 import 'package:nuptia/widgets/CustomAppBar.dart';
 import 'package:nuptia/widgets/MyWeddingActions.dart';
 import 'package:nuptia/widgets/WeddingCountdown.dart';
 import 'package:nuptia/widgets/CustomBottomNavigationBar.dart';
+import 'package:nuptia/widgets/ProviderBottomNavigationBar.dart';
 import 'package:provider/provider.dart';
 import 'package:nuptia/model/userList.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -28,9 +28,23 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index; // atualiza o índice selecionado
-    });
+    final currentUser =
+        Provider.of<UserList>(context, listen: false).currentUser;
+    final isProvider = currentUser?.isProvider ?? false;
+
+    if (index == 3) {
+      // se o usuário clicar em postar anúncio
+      if (isProvider) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => CreatePostPage()),
+        );
+      } else {
+        setState(() {
+          _selectedIndex = index; // atualiza o índice selecionado
+        });
+      }
+    }
   }
 
   void _pickWeddingDate(BuildContext context) async {
@@ -79,81 +93,86 @@ class _HomeScreenState extends State<HomeScreen> {
     final userList = Provider.of<UserList>(context);
     final username = userList.currentUser?.username ??
         'Usuário'; // Obtém o username do usuário logado
+    final currentUser = userList.currentUser;
+    final isProvider = currentUser?.isProvider ?? false;
 
-    List<Widget> _pages = <Widget>[
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 4.0),
-          Text(
-            'Bem-Vindo(a), $username',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'Inter',
-            ),
-          ),
-          const Text(
-            'Continue os preparativos para o seu casamento',
-            style: TextStyle(
-              fontFamily: 'Inter',
-              fontSize: 13,
-              fontWeight: FontWeight.w300,
-            ),
-          ),
-          const SizedBox(height: 16.0),
-          if (weddingDate == null)
-            ElevatedButton(
-              onPressed: () => _pickWeddingDate(context),
-              child: Text('Quando será meu casamento?'),
-            )
-          else
-            WeddingCountdown(
-              imageUrl: 'assets/images/0008-danibruno_pw-1000x668.png',
-              title: 'Meu Casamento', // Ajustado para "Meu Casamento"
-              countdownText: _calculateTimeUntilWedding(weddingDate!),
-              onExpand: () {
-                // Lógica para expandir o card
-              },
-              onEdit: () => _pickWeddingDate(context), // Editar a data
-            ),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  const SizedBox(height: 12.0),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        MyWeddingActions(
-                            buttonLabel: "Checklist",
-                            icon: Icon(Icons.checklist),
-                            onTap: () {}),
-                        MyWeddingActions(
-                            buttonLabel: "Meus fornecedores",
-                            icon: Icon(Icons.business),
-                            onTap: () {}),
-                        MyWeddingActions(
-                            buttonLabel: "Orçamentos",
-                            icon: Icon(Icons.attach_money),
-                            onTap: () {}),
-                        MyWeddingActions(
-                            buttonLabel: "Lista de convidados",
-                            icon: Icon(Icons.group),
-                            onTap: () {}),
-                        MyWeddingActions(
-                            buttonLabel: "Lista de presentes",
-                            icon: Icon(Icons.card_giftcard),
-                            onTap: () {}),
-                      ],
-                    ),
-                  ),
-                ],
+    List<Widget> _pages = [
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 4.0),
+            Text(
+              'Bem-Vindo(a), $username',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Inter',
               ),
             ),
-          ),
-        ],
+            const Text(
+              'Continue os preparativos para o seu casamento',
+              style: TextStyle(
+                fontFamily: 'Inter',
+                fontSize: 13,
+                fontWeight: FontWeight.w300,
+              ),
+            ),
+            const SizedBox(height: 16.0),
+            if (weddingDate == null)
+              ElevatedButton(
+                onPressed: () => _pickWeddingDate(context),
+                child: Text('Quando será meu casamento?'),
+              )
+            else
+              WeddingCountdown(
+                imageUrl: 'assets/images/0008-danibruno_pw-1000x668.png',
+                title: 'Meu Casamento', // Ajustado para "Meu Casamento"
+                countdownText: _calculateTimeUntilWedding(weddingDate!),
+                onExpand: () {
+                  // Lógica para expandir o card
+                },
+                onEdit: () => _pickWeddingDate(context), // Editar a data
+              ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    const SizedBox(height: 12.0),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          MyWeddingActions(
+                              buttonLabel: "Checklist",
+                              icon: Icon(Icons.checklist),
+                              onTap: () {}),
+                          MyWeddingActions(
+                              buttonLabel: "Meus fornecedores",
+                              icon: Icon(Icons.business),
+                              onTap: () {}),
+                          MyWeddingActions(
+                              buttonLabel: "Orçamentos",
+                              icon: Icon(Icons.attach_money),
+                              onTap: () {}),
+                          MyWeddingActions(
+                              buttonLabel: "Lista de convidados",
+                              icon: Icon(Icons.group),
+                              onTap: () {}),
+                          MyWeddingActions(
+                              buttonLabel: "Lista de presentes",
+                              icon: Icon(Icons.card_giftcard),
+                              onTap: () {}),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
       Center(child: Text('Notificações')),
       MarketplacePage(), // Página do marketplace
@@ -163,6 +182,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       appBar: CustomAppBar(),
+      bottomNavigationBar: isProvider
+          ? ProviderBottomNavigationBar(
+              selectedIndex: _selectedIndex, onItemTapped: _onItemTapped)
+          : CustomBottomNavigationBar(
+              selectedIndex: _selectedIndex,
+              onItemTapped: _onItemTapped,
+            ),
       backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
       body: IndexedStack(
         index: _selectedIndex,
@@ -171,10 +197,6 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         child: const Icon(Icons.add),
-      ),
-      bottomNavigationBar: CustomBottomNavigationBar(
-        selectedIndex: _selectedIndex,
-        onItemTapped: _onItemTapped,
       ),
     );
   }
