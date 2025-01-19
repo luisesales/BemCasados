@@ -5,12 +5,15 @@ import 'package:BemCasados/pages/auth/register.dart';
 import 'package:BemCasados/pages/auth/forgotPassword.dart';
 import 'package:BemCasados/pages/auth/splashScreen.dart';
 import 'package:BemCasados/pages/auth/welcomeScreen.dart'; // Certifique-se de ter a tela de bem-vindo
+import 'package:BemCasados/pages/create_product_page.dart'; // Certifique-se de ter a tela de bem-vindo
 
 import 'package:BemCasados/model/userList.dart';
 import 'package:BemCasados/pages/home/home.dart';
 import 'package:BemCasados/pages/marketplace/marketplace.dart'; // Importando a página do marketplace
 import 'package:provider/provider.dart';
 import 'package:BemCasados/utils/routes.dart';
+
+final String API_KEY = 'AIzaSyBdq5B1nT885EM68SgPuPANNzKd6nnsNc4';
 
 void main() {
   runApp(const MyApp());
@@ -67,10 +70,9 @@ class _MyAppState extends State<MyApp> {
           Routes.FORGOT_PASSWORD: (context) =>
               ForgotPassword(isProvider: isProvider),
           Routes.REGISTER: (context) => Register(isProvider: isProvider),
-          '/home': (context) => HomeScreen(),
-          '/login': (context) => Login(isProvider: isProvider),
-          '/marketplace': (context) =>
+          Routes.MARKETPLACE_SCREEN: (context) =>
               MarketplacePage(), // Rota para MarketplacePage
+          Routes.PRODUCT_FORM: (context) => CreateProductPage(),
         },
         debugShowCheckedModeBanner: false,
       ),

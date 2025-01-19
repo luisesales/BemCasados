@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:BemCasados/pages/provider/create_post_page.dart';
+import 'package:BemCasados/pages/create_product_page.dart';
 import 'package:BemCasados/widgets/CustomAppBar.dart';
 import 'package:BemCasados/widgets/MyWeddingActions.dart';
 import 'package:BemCasados/widgets/WeddingCountdown.dart';
@@ -37,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
       if (isProvider) {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => CreatePostPage()),
+          MaterialPageRoute(builder: (context) => CreateProductPage()),
         );
       } else {
         setState(() {

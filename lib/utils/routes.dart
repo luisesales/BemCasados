@@ -6,4 +6,6 @@ class Routes {
   static const WELCOME_SCREEN = '/welcome-screen';
   static const SPLASH_SCREEN = '/splash-screen';
   static const HOME_SCREEN = '/home';
+  static const MARKETPLACE_SCREEN = '/marketplace';
+  static const PRODUCT_FORM = '/product-form';
 }
