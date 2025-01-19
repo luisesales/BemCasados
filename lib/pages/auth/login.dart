@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:nuptia/components/formFieldPersonal.dart';
+import 'package:BemCasados/components/formFieldPersonal.dart';
 import 'package:provider/provider.dart';
-import 'package:nuptia/model/userList.dart';
-import 'package:nuptia/model/user.dart';
-import 'package:nuptia/utils/routes.dart';
+import 'package:BemCasados/model/userList.dart';
+import 'package:BemCasados/model/user.dart';
+import 'package:BemCasados/utils/routes.dart';
 
 class Login extends StatefulWidget {
   final bool isProvider;

@@ -15,7 +15,7 @@
         },
           
         {
-            "name": "Nuptia (release mode)",
+            "name": "BemCasados (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"

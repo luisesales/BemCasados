@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:nuptia/components/formFieldPersonal.dart';
+import 'package:BemCasados/components/formFieldPersonal.dart';
 import 'package:uuid/uuid.dart';
 
 class Register extends StatefulWidget {

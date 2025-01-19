@@ -1,4 +1,4 @@
-package com.example.nuptia
+package com.example.BemCasados
 
 import io.flutter.embedding.android.FlutterActivity
 
