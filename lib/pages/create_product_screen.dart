@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:BemCasados/components/image_input.dart';
+import 'package:BemCasados/components/location_input.dart';
 import 'package:BemCasados/model/product_location.dart';
 import 'package:BemCasados/provider/products_model.dart';
 import 'package:flutter/material.dart';
@@ -84,100 +86,167 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Crie um novo anúncio de produto ou serviço!',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.normal,
-              ),
-            ),
-
-            // TÍTULO
-            const SizedBox(height: 16),
-            TextField(
-              controller: _titleController,
-              decoration: InputDecoration(
-                labelText: 'Título do anúncio',
-                prefixIcon: Icon(Icons.title, color: Colors.blue.shade900),
-              ),
-            ),
-
-            // IMAGEM DO PRODUTO
-            /* SizedBox(height: 10),
-            ImageInput(this._selectImage), */
-
-            // DESCRIÇÃO
-            const SizedBox(height: 16),
-            TextField(
-              controller: _descriptionController,
-              decoration: InputDecoration(
-                labelText: 'Descrição (até 300 caracteres)',
-                prefixIcon: Icon(
-                  Icons.description,
-                  color: Colors.blue.shade900,
-                ),
-                border: OutlineInputBorder(),
-              ),
-              maxLines: 4,
-            ),
-
-            // INFORMAÇÕES PESSOAIS E VALOR
-            // INLINE DE TELEFONE COM PREÇO À DIREITA
-            //EMAIL
-            const SizedBox(height: 16),
-            TextField(
-              controller: _emailController,
-              decoration: InputDecoration(
-                labelText: 'Email',
-                prefixIcon: Icon(
-                  Icons.email,
-                  color: Colors.blue.shade900,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Crie um novo anúncio de produto ou serviço!',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.normal,
                 ),
               ),
-              maxLines: 4,
-            ),
 
-            //PREÇO
-            const SizedBox(height: 16),
-            TextField(
-              controller: _priceController,
-              decoration: InputDecoration(
-                labelText: 'R\$',
-                prefixIcon: Icon(
-                  Icons.attach_money,
-                  color: Colors.blue.shade900,
+              // TÍTULO
+              const SizedBox(height: 16),
+              TextField(
+                controller: _titleController,
+                decoration: InputDecoration(
+                  labelText: 'Título do anúncio',
+                  prefixIcon: Icon(Icons.title, color: Colors.blue.shade900),
                 ),
-                border: OutlineInputBorder(),
               ),
-              maxLines: 4,
-            ),
-
-            // TELEFONE PRA CONTATO
-            const SizedBox(height: 16),
-            TextField(
-              controller: _phoneController,
-              decoration: InputDecoration(
-                labelText: '(DDD) 90000-0000',
-                prefixIcon: Icon(
-                  Icons.description,
-                  color: Colors.blue.shade900,
+              const SizedBox(height: 24),
+              Text(
+                'Adicione uma foto ao seu anúncio',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF616161), // Tom cinza escuro confortável
                 ),
-                border: OutlineInputBorder(),
               ),
-              maxLines: 4,
-            ),
 
-            const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () {
-                // Lógica para criar o anúncio
-              },
-              child: Text('Criar Anúncio'),
-            ),
-          ],
+              // IMAGEM DO PRODUTO
+              SizedBox(height: 4),
+              ImageInput(this._selectImage),
+
+              // DESCRIÇÃO
+              const SizedBox(height: 16),
+              TextField(
+                controller: _descriptionController,
+                decoration: InputDecoration(
+                  labelText: 'Descrição (até 300 caracteres)',
+                  prefixIcon: Icon(
+                    Icons.description,
+                    color: Colors.blue.shade900,
+                  ),
+                  border: OutlineInputBorder(),
+                ),
+                maxLines: 4,
+              ),
+
+              const SizedBox(height: 20),
+              Text(
+                'Localização',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF616161),
+                ),
+              ),
+
+              // LOCALIZAÇÃO DO FORNECEDOR
+              SizedBox(height: 4),
+              LocationInput(this._saveLocation),
+
+              const SizedBox(height: 20),
+              Text(
+                'Informações gerais',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF616161),
+                ),
+              ),
+
+              // INFORMAÇÕES PESSOAIS E VALOR
+              // INLINE DE TELEFONE COM PREÇO À DIREITA
+              //EMAIL
+              const SizedBox(height: 16),
+              TextField(
+                controller: _emailController,
+                decoration: InputDecoration(
+                  labelText: 'Email',
+                  prefixIcon: Icon(
+                    Icons.email,
+                    color: Colors.blue.shade900,
+                  ),
+                ),
+                maxLines: 1,
+              ),
+              SizedBox(height: 24),
+              Row(
+                children: [
+                  // TELEFONE PARA CONTATO
+                  Expanded(
+                    flex: 3, // Divide espaço em 2 partes
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 8.0),
+                      child: TextField(
+                        controller: _phoneController,
+                        decoration: InputDecoration(
+                          labelText: '(DDD) 90000-0000',
+                          prefixIcon: Icon(
+                            Icons.phone, // Alterei para um ícone mais adequado
+                            color: Colors.blue.shade900,
+                          ),
+                          border: OutlineInputBorder(),
+                        ),
+                        keyboardType: TextInputType
+                            .phone, // Configura o teclado para telefone
+                      ),
+                    ),
+                  ),
+                  // PREÇO
+                  Expanded(
+                    flex: 2, // Divide espaço em 1 parte
+                    child: TextField(
+                      controller: _priceController,
+                      decoration: InputDecoration(
+                        labelText: 'R\$',
+                        prefixIcon: Icon(
+                          Icons.attach_money,
+                          color: Colors.blue.shade900,
+                        ),
+                        border: OutlineInputBorder(),
+                      ),
+                      keyboardType: TextInputType
+                          .number, // Configura o teclado para números
+                    ),
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 32),
+              Center(
+                child: ElevatedButton.icon(
+                  onPressed: () {
+                    // Lógica para criar o anúncio
+                  },
+                  icon: Icon(
+                    Icons.add_circle_outline,
+                    color: Colors.white,
+                  ),
+                  label: Text(
+                    'Criar Anúncio',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue.shade900,
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
