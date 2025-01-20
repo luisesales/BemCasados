@@ -5,7 +5,11 @@ class Routes {
   static const FORGOT_PASSWORD = '/forgot-password';
   static const WELCOME_SCREEN = '/welcome-screen';
   static const SPLASH_SCREEN = '/splash-screen';
+
+  static const PRODUCT_FORM = '/product-form';
   static const HOME_SCREEN = '/home';
   static const MARKETPLACE_SCREEN = '/marketplace';
-  static const PRODUCT_FORM = '/product-form';
+  static const GIFTS_LIST_SCREEN = '/gifts-list';
+  static const NOTIFICATIONS_SCREEN = '/notifications';
+  static const PROFILE_SCREEN = '/profile';
 }

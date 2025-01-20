@@ -1,3 +1,6 @@
+import 'package:BemCasados/pages/gifts_list_page.dart';
+import 'package:BemCasados/pages/notifications_screen.dart';
+import 'package:BemCasados/pages/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:BemCasados/pages/auth/login.dart';
 import 'package:BemCasados/pages/auth/selectUser.dart';
@@ -62,7 +65,6 @@ class _MyAppState extends State<MyApp> {
             )),
         home: SplashScreen(),
         routes: {
-          Routes.HOME_SCREEN: (context) => HomeScreen(),
           Routes.WELCOME_SCREEN: (context) =>
               WelcomeScreen(), // Tela de Bem-Vindo
           Routes.SELECT_USER: (context) => SelectUser(onSelected: selectUser),
@@ -70,9 +72,14 @@ class _MyAppState extends State<MyApp> {
           Routes.FORGOT_PASSWORD: (context) =>
               ForgotPassword(isProvider: isProvider),
           Routes.REGISTER: (context) => Register(isProvider: isProvider),
+          Routes.PRODUCT_FORM: (context) => CreateProductScreen(),
+
+          Routes.HOME_SCREEN: (context) => HomeScreen(),
+          Routes.NOTIFICATIONS_SCREEN: (context) => NotificationsScreen(),
           Routes.MARKETPLACE_SCREEN: (context) =>
               MarketplacePage(), // Rota para MarketplacePage
-          Routes.PRODUCT_FORM: (context) => CreateProductScreen(),
+          Routes.GIFTS_LIST_SCREEN: (context) => GiftsListScreen(),
+          Routes.PROFILE_SCREEN: (context) => ProfileScreen(),
         },
         debugShowCheckedModeBanner: false,
       ),

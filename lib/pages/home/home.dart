@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:BemCasados/pages/create_product_screen.dart';
 import 'package:BemCasados/widgets/CustomAppBar.dart';
-import 'package:BemCasados/widgets/MyWeddingActions.dart';
-import 'package:BemCasados/widgets/WeddingCountdown.dart';
 import 'package:BemCasados/widgets/CustomBottomNavigationBar.dart';
 import 'package:BemCasados/widgets/ProviderBottomNavigationBar.dart';
 import 'package:provider/provider.dart';
 import 'package:BemCasados/model/userList.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:BemCasados/pages/marketplace/marketplace.dart'; // Importar a página do marketplace
+import 'package:BemCasados/pages/notifications_screen.dart'; // Importar tela de notificações
+import 'package:BemCasados/pages/gifts_list_page.dart'; // Importar tela de lista de presentes
+import 'package:BemCasados/pages/profile_screen.dart'; // Importar tela de perfil
+import 'package:BemCasados/pages/home/home_content_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -32,19 +34,19 @@ class _HomeScreenState extends State<HomeScreen> {
         Provider.of<UserList>(context, listen: false).currentUser;
     final isProvider = currentUser?.isProvider ?? false;
 
-    if (index == 3) {
+    /* if (index == 3) {
       // se o usuário clicar em postar anúncio
       if (isProvider) {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => CreateProductScreen()),
         );
-      } else {
-        setState(() {
-          _selectedIndex = index; // atualiza o índice selecionado
-        });
+        return;
       }
-    }
+    } */
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 
   void _pickWeddingDate(BuildContext context) async {
@@ -91,97 +93,35 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     // Obter o nome de usuário a partir do Provider
     final userList = Provider.of<UserList>(context);
-    final username = userList.currentUser?.username ??
-        'Usuário'; // Obtém o username do usuário logado
     final currentUser = userList.currentUser;
     final isProvider = currentUser?.isProvider ?? false;
 
     List<Widget> _pages = [
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 4.0),
-            Text(
-              'Bem-Vindo(a), $username',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'Inter',
-              ),
-            ),
-            const Text(
-              'Continue os preparativos para o seu casamento',
-              style: TextStyle(
-                fontFamily: 'Inter',
-                fontSize: 13,
-                fontWeight: FontWeight.w300,
-              ),
-            ),
-            const SizedBox(height: 16.0),
-            if (weddingDate == null)
-              ElevatedButton(
-                onPressed: () => _pickWeddingDate(context),
-                child: Text('Quando será meu casamento?'),
-              )
-            else
-              WeddingCountdown(
-                imageUrl: 'assets/images/0008-danibruno_pw-1000x668.png',
-                title: 'Meu Casamento', // Ajustado para "Meu Casamento"
-                countdownText: _calculateTimeUntilWedding(weddingDate!),
-                onExpand: () {
-                  // Lógica para expandir o card
-                },
-                onEdit: () => _pickWeddingDate(context), // Editar a data
-              ),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    const SizedBox(height: 12.0),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          MyWeddingActions(
-                              buttonLabel: "Checklist",
-                              icon: Icon(Icons.checklist),
-                              onTap: () {}),
-                          MyWeddingActions(
-                              buttonLabel: "Meus fornecedores",
-                              icon: Icon(Icons.business),
-                              onTap: () {}),
-                          MyWeddingActions(
-                              buttonLabel: "Orçamentos",
-                              icon: Icon(Icons.attach_money),
-                              onTap: () {}),
-                          MyWeddingActions(
-                              buttonLabel: "Lista de convidados",
-                              icon: Icon(Icons.group),
-                              onTap: () {}),
-                          MyWeddingActions(
-                              buttonLabel: "Lista de presentes",
-                              icon: Icon(Icons.card_giftcard),
-                              onTap: () {}),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-      Center(child: Text('Notificações')),
+      HomeScreenContent(),
+      NotificationsScreen(), // Tela de notificações
       MarketplacePage(), // Página do marketplace
-      Center(child: Text('Presentes')),
-      Center(child: Text('Usuário')),
+      isProvider ? CreateProductScreen() : GiftsListScreen(),
+      ProfileScreen(), // Tela de perfil
     ];
 
+    if (_selectedIndex == 0 || _selectedIndex == 2) {
+      return Scaffold(
+        appBar: CustomAppBar(),
+        bottomNavigationBar: isProvider
+            ? ProviderBottomNavigationBar(
+                selectedIndex: _selectedIndex, onItemTapped: _onItemTapped)
+            : CustomBottomNavigationBar(
+                selectedIndex: _selectedIndex,
+                onItemTapped: _onItemTapped,
+              ),
+        backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
+        body: IndexedStack(
+          index: _selectedIndex,
+          children: _pages,
+        ),
+      );
+    }
     return Scaffold(
-      appBar: CustomAppBar(),
       bottomNavigationBar: isProvider
           ? ProviderBottomNavigationBar(
               selectedIndex: _selectedIndex, onItemTapped: _onItemTapped)
@@ -193,10 +133,6 @@ class _HomeScreenState extends State<HomeScreen> {
       body: IndexedStack(
         index: _selectedIndex,
         children: _pages,
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: const Icon(Icons.add),
       ),
     );
   }
