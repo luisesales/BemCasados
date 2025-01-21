@@ -8,79 +8,88 @@ class SelectUser extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        color: Theme.of(context).primaryColor,
-        child: Center(
-          heightFactor: MediaQuery.of(context).size.height,
-          child: ListView(
-            children: [
-              SvgPicture.asset("assets/images/logobc.svg", height: 100),
-              Image.asset(
-                'assets/images/casal_tomando_cafe.png',
-                height: MediaQuery.of(context).size.height * 2 / 3,
-              ),
-              Container(
-                margin: EdgeInsets.only(top: 40, left: 16, right: 16),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          foregroundColor:
-                              WidgetStateProperty.all(Colors.white),
-                          shape: WidgetStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                          ),
-                        ),
-                        onPressed: () {
-                          onSelected(false);
-                          Navigator.of(context).pushNamed('/login');
-                        },
-                        child: Padding(
-                          padding: EdgeInsets.fromLTRB(32, 16, 32, 16),
-                          child: Text(
-                            'Quero organizar meu casamento',
-                            style: Theme.of(context).textTheme.labelMedium,
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 16),
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          foregroundColor:
-                              WidgetStateProperty.all(Colors.white),
-                          shape: WidgetStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                          ),
-                        ),
-                        onPressed: () {
-                          onSelected(true);
-                          Navigator.of(context).pushNamed('/login');
-                        },
-                        child: Padding(
-                          padding: EdgeInsets.fromLTRB(32, 16, 32, 16),
-                          child: Text(
-                            'Quero anunciar meus serviços',
-                            style: Theme.of(context).textTheme.labelMedium,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+      body: Stack(children: <Widget>[
+        Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/select_user_image.png'),
+              fit: BoxFit.cover,
+            ),
           ),
         ),
-      ),
+        Container(
+          height: MediaQuery.of(context).size.height,
+          color: Theme.of(context).primaryColor,
+          child: Center(
+            child: ListView(
+              children: [
+                SvgPicture.asset("assets/images/logobc.svg", height: 100),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 2 / 3,
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 40, left: 16, right: 16),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                            foregroundColor:
+                                WidgetStatePropertyAll(Colors.white),
+                            shape: WidgetStatePropertyAll(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                            ),
+                          ),
+                          onPressed: () {
+                            onSelected(false);
+                            Navigator.of(context).pushNamed('/login');
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.fromLTRB(32, 16, 32, 16),
+                            child: Text(
+                              'Quero organizar meu casamento',
+                              style: Theme.of(context).textTheme.labelMedium,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 16),
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                            foregroundColor:
+                                WidgetStatePropertyAll(Colors.white),
+                            shape: WidgetStatePropertyAll(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                            ),
+                          ),
+                          onPressed: () {
+                            onSelected(true);
+                            Navigator.of(context).pushNamed('/login');
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.fromLTRB(32, 16, 32, 16),
+                            child: Text(
+                              'Quero anunciar meus serviços',
+                              style: Theme.of(context).textTheme.labelMedium,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ]),
     );
   }
 }

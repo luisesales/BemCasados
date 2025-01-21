@@ -3,8 +3,9 @@ class Routes {
   static const LOGIN = '/login';
   static const REGISTER = '/register';
   static const FORGOT_PASSWORD = '/forgot-password';
-  static const WELCOME_SCREEN = '/welcome-screen';
-  static const SPLASH_SCREEN = '/splash-screen';
+  static const INTRO_FIRST_STEP = '/intro-first-step';
+  static const INTRO_SECOND_STEP = '/intro-second-step';
+  static const INTRO_THIRD_STEP = '/intro-third-step';
 
   static const PRODUCT_FORM = '/product-form';
   static const HOME_SCREEN = '/home';
