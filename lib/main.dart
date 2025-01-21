@@ -6,9 +6,11 @@ import 'package:BemCasados/pages/auth/login.dart';
 import 'package:BemCasados/pages/auth/selectUser.dart';
 import 'package:BemCasados/pages/auth/register.dart';
 import 'package:BemCasados/pages/auth/forgotPassword.dart';
-import 'package:BemCasados/pages/auth/splashScreen.dart';
-import 'package:BemCasados/pages/auth/welcomeScreen.dart'; // Certifique-se de ter a tela de bem-vindo
-import 'package:BemCasados/pages/create_product_screen.dart'; // Certifique-se de ter a tela de bem-vindo
+import 'package:BemCasados/pages/create_product_screen.dart';
+import 'package:BemCasados/pages/intro/splashScreen.dart';
+import 'package:BemCasados/pages/intro/introFirstStep.dart';
+import 'package:BemCasados/pages/intro/introSecondStep.dart';
+import 'package:BemCasados/pages/intro/introThirdStep.dart';
 
 import 'package:BemCasados/model/userList.dart';
 import 'package:BemCasados/pages/home/home.dart';
@@ -65,8 +67,9 @@ class _MyAppState extends State<MyApp> {
             )),
         home: SplashScreen(),
         routes: {
-          Routes.WELCOME_SCREEN: (context) =>
-              WelcomeScreen(), // Tela de Bem-Vindo
+          Routes.INTRO_FIRST_STEP: (context) => IntroFirstStep(),
+          Routes.INTRO_SECOND_STEP: (context) => IntroSecondStep(),
+          Routes.INTRO_THIRD_STEP: (context) => IntroThirdStep(),
           Routes.SELECT_USER: (context) => SelectUser(onSelected: selectUser),
           Routes.LOGIN: (context) => Login(isProvider: isProvider),
           Routes.FORGOT_PASSWORD: (context) =>

@@ -12,7 +12,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer(Duration(seconds: 3), () {
-      Navigator.of(context).pushReplacementNamed('/welcome-screen');
+      Navigator.of(context).pushReplacementNamed('/intro-first-step');
     });
   }
 
@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context)
           .primaryColor, // Atualizei a cor de fundo para #D51D48
-      body: Center(child: SvgPicture.asset("assets/images/logobc.svg")),
+      body: Center(child: SvgPicture.asset("assets/images/logo.svg")),
     );
   }
 }
