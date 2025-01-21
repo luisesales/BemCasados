@@ -1,5 +1,8 @@
 import 'dart:io';
+import 'package:BemCasados/model/userList.dart';
+import 'package:BemCasados/widgets/ProductList.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -7,19 +10,21 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  String userName = 'John Doe';
-  bool isProvider = true; // Altere conforme necessário
-  File? _userImage;
-
   void _pickImage() async {
     // Lógica para pegar a imagem (pode ser via ImagePicker ou outra ferramenta)
   }
 
   @override
   Widget build(BuildContext context) {
+    final currentUser =
+        Provider.of<UserList>(context, listen: false).currentUser;
+    final isProvider = currentUser?.isProvider ?? false;
+    final userName = currentUser?.username;
+    File? _userImage; //Implementar foto do usuário depois
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Perfil do Usuário'),
+        title: Text('Meu perfil'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -30,10 +35,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: CircleAvatar(
                 radius: 50,
                 backgroundColor: Colors.blue.shade900,
-                backgroundImage: _userImage != null
-                    ? FileImage(_userImage!)
-                    : AssetImage('assets/images/default_profile.png')
-                        as ImageProvider,
+/*                 backgroundImage:  */
                 child: _userImage == null
                     ? Icon(
                         Icons.camera_alt,
@@ -44,7 +46,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             SizedBox(height: 16),
             Text(
-              'Nome: $userName',
+              '$userName',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             Text(
@@ -65,6 +67,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
             ),
+            isProvider
+                ? ProductList()
+                : Text('Em breve: Informações sobre seu casamento'),
           ],
         ),
       ),

@@ -1,3 +1,4 @@
+import 'package:BemCasados/provider/products_model.dart';
 import 'package:flutter/material.dart';
 import 'package:BemCasados/pages/create_product_screen.dart';
 import 'package:BemCasados/widgets/CustomAppBar.dart';
@@ -34,40 +35,9 @@ class _HomeScreenState extends State<HomeScreen> {
         Provider.of<UserList>(context, listen: false).currentUser;
     final isProvider = currentUser?.isProvider ?? false;
 
-    /* if (index == 3) {
-      // se o usuário clicar em postar anúncio
-      if (isProvider) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => CreateProductScreen()),
-        );
-        return;
-      }
-    } */
     setState(() {
       _selectedIndex = index;
     });
-  }
-
-  void _pickWeddingDate(BuildContext context) async {
-    final DateTime? pickedDate = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime.now(),
-      lastDate: DateTime(2100),
-    );
-
-    if (pickedDate != null && pickedDate != weddingDate) {
-      setState(() {
-        weddingDate = pickedDate;
-      });
-      _saveWeddingDate(pickedDate);
-    }
-  }
-
-  void _saveWeddingDate(DateTime date) async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setString('weddingDate', date.toIso8601String());
   }
 
   void _loadWeddingDate() async {
@@ -80,15 +50,6 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  String _calculateTimeUntilWedding(DateTime weddingDate) {
-    final now = DateTime.now();
-    final difference = weddingDate.difference(now);
-    final months = difference.inDays ~/ 30;
-    final days = difference.inDays % 30;
-    final hours = difference.inHours % 24;
-    return '$months meses, $days dias, $hours horas';
-  }
-
   @override
   Widget build(BuildContext context) {
     // Obter o nome de usuário a partir do Provider
@@ -98,10 +59,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
     List<Widget> _pages = [
       HomeScreenContent(),
-      NotificationsScreen(), // Tela de notificações
-      MarketplacePage(), // Página do marketplace
-      isProvider ? CreateProductScreen() : GiftsListScreen(),
-      ProfileScreen(), // Tela de perfil
+      NotificationsScreen(),
+      MarketplacePage(),
+      isProvider
+          ? ChangeNotifierProvider(
+              create: (_) => ProductsModel(),
+              child: CreateProductScreen(),
+            )
+          : GiftsListScreen(),
+      ProfileScreen(),
     ];
 
     if (_selectedIndex == 0 || _selectedIndex == 2) {

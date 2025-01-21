@@ -221,9 +221,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
               const SizedBox(height: 32),
               Center(
                 child: ElevatedButton.icon(
-                  onPressed: () {
-                    // Lógica para criar o anúncio
-                  },
+                  onPressed: _submitForm,
                   icon: Icon(
                     Icons.add_circle_outline,
                     color: Colors.white,
