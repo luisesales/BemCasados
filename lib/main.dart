@@ -19,10 +19,11 @@ import 'package:BemCasados/pages/home/home.dart';
 import 'package:BemCasados/pages/marketplace/marketplace.dart'; // Importando a página do marketplace
 import 'package:provider/provider.dart';
 import 'package:BemCasados/utils/routes.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 final String API_KEY = 'AIzaSyBdq5B1nT885EM68SgPuPANNzKd6nnsNc4';
 
-void main() {
+void main() async {
   runApp(
     MultiProvider(
       providers: [

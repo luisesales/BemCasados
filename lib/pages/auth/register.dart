@@ -20,7 +20,7 @@ class _RegisterState extends State<Register> {
   final _formKey = GlobalKey<FormState>();
   final _formData = <String, String>{};
   String _errorMessage = '';
-  final uuid = Uuid(); // Inicializa o gerador de UUID
+  final uuid = const Uuid(); // Inicializa o gerador de UUID
 
   void setData(String input, String data) {
     _formData[data] = input;
