@@ -143,7 +143,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                 controller: _titleController,
                 decoration: InputDecoration(
                   labelText: 'Título do anúncio',
-                  prefixIcon: Icon(Icons.title, color: Colors.blue.shade900),
+                  prefixIcon: Icon(Icons.title, color: Colors.black),
                 ),
               ),
               const SizedBox(height: 24),
@@ -164,7 +164,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                   labelText: 'Descrição (até 300 caracteres)',
                   prefixIcon: Icon(
                     Icons.description,
-                    color: Colors.blue.shade900,
+                    color: Colors.black,
                   ),
                   border: const OutlineInputBorder(),
                 ),
@@ -197,7 +197,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                   labelText: 'Email',
                   prefixIcon: Icon(
                     Icons.email,
-                    color: Colors.blue.shade900,
+                    color: Colors.black,
                   ),
                 ),
                 maxLines: 1,
@@ -215,7 +215,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                           labelText: '(DDD) 90000-0000',
                           prefixIcon: Icon(
                             Icons.phone,
-                            color: Colors.blue.shade900,
+                            color: Colors.black,
                           ),
                           border: const OutlineInputBorder(),
                         ),
@@ -231,7 +231,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                         labelText: 'R\$',
                         prefixIcon: Icon(
                           Icons.attach_money,
-                          color: Colors.blue.shade900,
+                          color: Colors.black,
                         ),
                         border: const OutlineInputBorder(),
                       ),
@@ -257,7 +257,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                     ),
                   ),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue.shade900,
+                    backgroundColor: Colors.black,
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 12),
                     shape: RoundedRectangleBorder(

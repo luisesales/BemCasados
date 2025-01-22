@@ -72,13 +72,13 @@ class _ImageInputState extends State<ImageInput> {
             TextButton.icon(
               icon: Icon(
                 Icons.camera_alt,
-                color: Colors.blue.shade900,
+                color: Colors.black,
               ),
               label: Text(
                 'Tirar foto',
                 style: TextStyle(
                   fontSize: 14,
-                  color: Colors.blue.shade900,
+                  color: Colors.black,
                 ),
               ),
               onPressed: _takePicture,
@@ -86,13 +86,13 @@ class _ImageInputState extends State<ImageInput> {
             TextButton.icon(
               icon: Icon(
                 Icons.image,
-                color: Colors.blue.shade900,
+                color: Colors.black,
               ),
               label: Text(
                 'Selecionar da galeria',
                 style: TextStyle(
                   fontSize: 14,
-                  color: Colors.blue.shade900,
+                  color: Colors.black,
                 ),
               ),
               onPressed: () {} /* _selectFromGallery */,

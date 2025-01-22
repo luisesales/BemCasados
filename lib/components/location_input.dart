@@ -131,7 +131,7 @@ class _LocationInputState extends State<LocationInput> {
               TextButton.icon(
                 icon: Icon(
                   Icons.location_on,
-                  color: Colors.blue.shade900, // Ícone azul escuro
+                  color: Colors.black, // Ícone azul escuro
                 ),
                 label: Text(
                   'Localização atual',
@@ -145,7 +145,7 @@ class _LocationInputState extends State<LocationInput> {
               TextButton.icon(
                 icon: Icon(
                   Icons.map,
-                  color: Colors.blue.shade900, // Ícone azul escuro
+                  color: Colors.black, // Ícone azul escuro
                 ),
                 label: Text(
                   'Selecione no Mapa',

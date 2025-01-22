@@ -10,17 +10,17 @@ class GiftsListScreen extends StatelessWidget {
       body: ListView(
         children: [
           ListTile(
-            leading: Icon(Icons.card_giftcard, color: Colors.blue.shade900),
+            leading: Icon(Icons.card_giftcard, color: Colors.black),
             title: Text('Presente 1'),
             subtitle: Text('Descrição do presente 1'),
           ),
           ListTile(
-            leading: Icon(Icons.card_giftcard, color: Colors.blue.shade900),
+            leading: Icon(Icons.card_giftcard, color: Colors.black),
             title: Text('Presente 2'),
             subtitle: Text('Descrição do presente 2'),
           ),
           ListTile(
-            leading: Icon(Icons.card_giftcard, color: Colors.blue.shade900),
+            leading: Icon(Icons.card_giftcard, color: Colors.black),
             title: Text('Presente 3'),
             subtitle: Text('Descrição do presente 3'),
           ),
