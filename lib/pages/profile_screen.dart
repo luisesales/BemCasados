@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:BemCasados/model/userList.dart';
-import 'package:BemCasados/widgets/ProductList.dart';
+import 'package:BemCasados/pages/products_detail_screen.dart';
+import 'package:BemCasados/provider/products_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,7 +21,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         Provider.of<UserList>(context, listen: false).currentUser;
     final isProvider = currentUser?.isProvider ?? false;
     final userName = currentUser?.username;
-    File? _userImage; //Implementar foto do usuário depois
+    File? _userImage; // Implementar foto do usuário depois
 
     return Scaffold(
       appBar: AppBar(
@@ -29,13 +30,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             GestureDetector(
               onTap: _pickImage,
               child: CircleAvatar(
                 radius: 50,
                 backgroundColor: Colors.blue.shade900,
-/*                 backgroundImage:  */
                 child: _userImage == null
                     ? Icon(
                         Icons.camera_alt,
@@ -67,8 +68,93 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
             ),
+            SizedBox(height: 20),
             isProvider
-                ? ProductList()
+                ? Expanded(
+                    child: FutureBuilder(
+                      future: Provider.of<ProductsModel>(context, listen: false)
+                          .loadProducts(),
+                      builder: (ctx, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return Center(child: CircularProgressIndicator());
+                        }
+                        return Consumer<ProductsModel>(
+                          child: Center(
+                            child: Text(
+                              'Nenhum produto adicionado.',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          ),
+                          builder: (context, products, child) {
+                            if (products.itemsCount == 0) return child!;
+                            return ListView.builder(
+                              itemCount: products.itemsCount,
+                              itemBuilder: (context, index) {
+                                final product = products.itemByIndex(index);
+                                return ListTile(
+                                  leading: CircleAvatar(
+                                    backgroundImage: FileImage(product.image),
+                                  ),
+                                  title: Text(product.title),
+                                  trailing: IconButton(
+                                    icon: Icon(Icons.delete, color: Colors.red),
+                                    onPressed: () async {
+                                      final confirm = await showDialog<bool>(
+                                        context: context,
+                                        builder: (ctx) => AlertDialog(
+                                          title: Text('Confirmação'),
+                                          content: Text(
+                                            'Deseja realmente remover este produto?',
+                                          ),
+                                          actions: [
+                                            TextButton(
+                                              child: Text('Cancelar'),
+                                              onPressed: () =>
+                                                  Navigator.of(ctx).pop(false),
+                                            ),
+                                            ElevatedButton(
+                                              child: Text('Remover'),
+                                              onPressed: () =>
+                                                  Navigator.of(ctx).pop(true),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+
+                                      if (confirm == true) {
+                                        Provider.of<ProductsModel>(context,
+                                                listen: false)
+                                            .removeProduct(product.id);
+                                      }
+                                    },
+                                  ),
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (ctx) => ProductDetailScreen(
+                                          title: product.title,
+                                          description: product.description,
+                                          price: product.price,
+                                          image: product.image,
+                                          phone: product.phone,
+                                          email: product.email,
+                                          address: product.location!.address,
+                                          latitude: product.location!.latitude,
+                                          longitude:
+                                              product.location!.longitude,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  )
                 : Text('Em breve: Informações sobre seu casamento'),
           ],
         ),

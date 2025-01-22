@@ -1,7 +1,8 @@
 import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:BemCasados/model/product_location.dart';
 
-class Product {
+class Product with ChangeNotifier {
   final String id;
   final double price;
   final String title;

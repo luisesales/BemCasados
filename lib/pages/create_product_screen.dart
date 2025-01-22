@@ -1,8 +1,13 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:BemCasados/components/image_input.dart';
 import 'package:BemCasados/components/location_input.dart';
+import 'package:BemCasados/model/product.dart';
+import 'package:BemCasados/model/productRepository.dart';
 import 'package:BemCasados/model/product_location.dart';
+import 'package:BemCasados/pages/home/home.dart';
+import 'package:BemCasados/pages/home/home_content_screen.dart';
 import 'package:BemCasados/provider/products_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -32,7 +37,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
     _currLocation = currLocation;
   }
 
-  void _submitForm() {
+  void _submitForm() async {
     if (_titleController.text.isEmpty ||
         _descriptionController.text.isEmpty ||
         _priceController.text.isEmpty ||
@@ -40,48 +45,84 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
         _emailController.text.isEmpty ||
         _pickedImage == null ||
         _currLocation == null) {
-      print('Por favor, preencha todos os campos.'); //transformar em snackbar
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Por favor, preencha todos os campos corretamente.'),
+        ),
+      );
       return;
     }
 
     final price = double.tryParse(_priceController.text);
     if (price == null || price <= 0) {
-      print('Por favor, insira um preço válido.');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Por favor, insira um preço válido.'),
+        ),
+      );
       return;
     }
 
-    if (_titleController.text.isEmpty) {
-      print('O título não pode estar vazio.');
-      return;
-    }
+/*     // Criar o produto
+    final product = Product(
+      id: Random().nextDouble().toString(),
+      title: _titleController.text,
+      description: _descriptionController.text,
+      price: price,
+      phone: _phoneController.text,
+      email: _emailController.text,
+      image: _pickedImage!,
+      location: ProductLocation(
+        latitude: _currLocation!.latitude,
+        longitude: _currLocation!.longitude,
+        address: _currLocation!.address,
+      ),
+    ); */
 
-    if (_pickedImage == null) {
-      print('Por favor, selecione uma imagem.');
-      return;
-    }
-
-    if (_currLocation == null) {
-      print('Por favor, selecione uma localização.');
-      return;
-    }
-
-    Provider.of<ProductsModel>(context, listen: false).addProduct(
+    try {
+      // Salvar localmente
+      Provider.of<ProductsModel>(context, listen: false).addProduct(
         _titleController.text,
         _descriptionController.text,
         price,
         _phoneController.text,
         _emailController.text,
         _pickedImage!,
-        _currLocation!);
+        ProductLocation(
+          latitude: _currLocation!.latitude,
+          longitude: _currLocation!.longitude,
+          address: _currLocation!.address,
+        ),
+      );
 
-    Navigator.of(context).pop();
+      /* // Salvar remotamente
+      await Provider.of<ProductRepository>(context, listen: false)
+          .addProduct(product); */
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Produto salvo com sucesso!')),
+      );
+
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => HomeScreen()),
+        (Route<dynamic> route) => false, // Remove todas as rotas anteriores
+      );
+    } catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Erro ao salvar o produto: $error')),
+      );
+      print("$error");
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Anunciar produto', style: TextStyle(color: Colors.white)),
+        title: const Text(
+          'Anunciar produto',
+          style: TextStyle(color: Colors.white),
+        ),
         backgroundColor: const Color.fromARGB(255, 213, 29, 72),
       ),
       body: Padding(
@@ -90,15 +131,13 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Crie um novo anúncio de produto ou serviço!',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.normal,
                 ),
               ),
-
-              // TÍTULO
               const SizedBox(height: 16),
               TextField(
                 controller: _titleController,
@@ -108,20 +147,16 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                 ),
               ),
               const SizedBox(height: 24),
-              Text(
+              const Text(
                 'Adicione uma foto ao seu anúncio',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF616161), // Tom cinza escuro confortável
+                  color: Color(0xFF616161),
                 ),
               ),
-
-              // IMAGEM DO PRODUTO
-              SizedBox(height: 4),
-              ImageInput(this._selectImage),
-
-              // DESCRIÇÃO
+              const SizedBox(height: 4),
+              ImageInput(_selectImage),
               const SizedBox(height: 16),
               TextField(
                 controller: _descriptionController,
@@ -131,13 +166,12 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                     Icons.description,
                     color: Colors.blue.shade900,
                   ),
-                  border: OutlineInputBorder(),
+                  border: const OutlineInputBorder(),
                 ),
                 maxLines: 4,
               ),
-
               const SizedBox(height: 20),
-              Text(
+              const Text(
                 'Localização',
                 style: TextStyle(
                   fontSize: 20,
@@ -145,13 +179,10 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                   color: Color(0xFF616161),
                 ),
               ),
-
-              // LOCALIZAÇÃO DO FORNECEDOR
-              SizedBox(height: 4),
-              LocationInput(this._saveLocation),
-
+              const SizedBox(height: 4),
+              LocationInput(_saveLocation),
               const SizedBox(height: 20),
-              Text(
+              const Text(
                 'Informações gerais',
                 style: TextStyle(
                   fontSize: 20,
@@ -159,10 +190,6 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                   color: Color(0xFF616161),
                 ),
               ),
-
-              // INFORMAÇÕES PESSOAIS E VALOR
-              // INLINE DE TELEFONE COM PREÇO À DIREITA
-              //EMAIL
               const SizedBox(height: 16),
               TextField(
                 controller: _emailController,
@@ -175,12 +202,11 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                 ),
                 maxLines: 1,
               ),
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
               Row(
                 children: [
-                  // TELEFONE PARA CONTATO
                   Expanded(
-                    flex: 3, // Divide espaço em 2 partes
+                    flex: 3,
                     child: Padding(
                       padding: const EdgeInsets.only(right: 8.0),
                       child: TextField(
@@ -188,19 +214,17 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                         decoration: InputDecoration(
                           labelText: '(DDD) 90000-0000',
                           prefixIcon: Icon(
-                            Icons.phone, // Alterei para um ícone mais adequado
+                            Icons.phone,
                             color: Colors.blue.shade900,
                           ),
-                          border: OutlineInputBorder(),
+                          border: const OutlineInputBorder(),
                         ),
-                        keyboardType: TextInputType
-                            .phone, // Configura o teclado para telefone
+                        keyboardType: TextInputType.phone,
                       ),
                     ),
                   ),
-                  // PREÇO
                   Expanded(
-                    flex: 2, // Divide espaço em 1 parte
+                    flex: 2,
                     child: TextField(
                       controller: _priceController,
                       decoration: InputDecoration(
@@ -209,24 +233,22 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                           Icons.attach_money,
                           color: Colors.blue.shade900,
                         ),
-                        border: OutlineInputBorder(),
+                        border: const OutlineInputBorder(),
                       ),
-                      keyboardType: TextInputType
-                          .number, // Configura o teclado para números
+                      keyboardType: TextInputType.number,
                     ),
                   ),
                 ],
               ),
-
               const SizedBox(height: 32),
               Center(
                 child: ElevatedButton.icon(
                   onPressed: _submitForm,
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.add_circle_outline,
                     color: Colors.white,
                   ),
-                  label: Text(
+                  label: const Text(
                     'Criar Anúncio',
                     style: TextStyle(
                       fontSize: 16,
@@ -236,7 +258,8 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                   ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue.shade900,
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 12),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),

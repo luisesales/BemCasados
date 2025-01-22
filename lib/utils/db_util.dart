@@ -12,9 +12,9 @@ class DbUtil {
       pathToDatabase,
       onCreate: (db, version) {
         return db.execute(
-            'CREATE TABLE places (id TEXT PRIMARY KEY, title TEXT, price DOUBLE, image TEXT, latitude REAL, longitude REAL, address TEXT, phone TEXT, email TEXT)');
+            'CREATE TABLE products (id TEXT PRIMARY KEY, title TEXT, description TEXT, price DOUBLE, image TEXT, latitude REAL, longitude REAL, address TEXT, phone TEXT, email TEXT)');
       },
-      version: 1,
+      version: 5,
     );
   }
 

@@ -1,6 +1,8 @@
+import 'package:BemCasados/model/productRepository.dart';
 import 'package:BemCasados/pages/gifts_list_page.dart';
 import 'package:BemCasados/pages/notifications_screen.dart';
 import 'package:BemCasados/pages/profile_screen.dart';
+import 'package:BemCasados/provider/products_model.dart';
 import 'package:flutter/material.dart';
 import 'package:BemCasados/pages/auth/login.dart';
 import 'package:BemCasados/pages/auth/selectUser.dart';
@@ -21,7 +23,16 @@ import 'package:BemCasados/utils/routes.dart';
 final String API_KEY = 'AIzaSyBdq5B1nT885EM68SgPuPANNzKd6nnsNc4';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => ProductsModel()),
+        /* ChangeNotifierProvider(create: (context) => ProductRepository()), */
+        // Outros providers, se necessário
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {

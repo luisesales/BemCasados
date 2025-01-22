@@ -2,7 +2,6 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:BemCasados/model/product_location.dart';
-import 'package:BemCasados/services/product_services.dart';
 import 'package:BemCasados/model/product.dart';
 import 'package:BemCasados/utils/db_util.dart';
 
@@ -10,7 +9,6 @@ import 'package:flutter/material.dart';
 
 class ProductsModel with ChangeNotifier {
   List<Product> _items = [];
-  final ProductService _productService = ProductService();
 
   List<Product> get items {
     return [..._items];
@@ -25,21 +23,22 @@ class ProductsModel with ChangeNotifier {
   }
 
   // parâmetro de localização adicionado
-  void addProduct(String title, String description, double price, String phone,
-      String email, File img, ProductLocation location) async {
+  Future<void> addProduct(String title, String description, double price,
+      String phone, String email, File img, ProductLocation location) async {
     final newProduct = Product(
-        id: Random().nextDouble().toString(),
-        title: title,
-        description: description,
-        price: price,
-        phone: phone,
-        email: email,
-        location: location,
-        image: img);
+      id: Random().nextDouble().toString(),
+      title: title,
+      description: description,
+      price: price,
+      phone: phone,
+      email: email,
+      location: location,
+      image: img,
+    );
 
     _items.add(newProduct);
 
-    DbUtil.insert('places', {
+    await DbUtil.insert('products', {
       'id': newProduct.id,
       'title': newProduct.title,
       'description': newProduct.description,
@@ -47,23 +46,10 @@ class ProductsModel with ChangeNotifier {
       'phone': newProduct.phone,
       'email': newProduct.email,
       'image': newProduct.image.path,
-      'latitude': newProduct.location!.latitude, // pq n newProduct.loca...
+      'latitude': newProduct.location!.latitude,
       'longitude': newProduct.location!.longitude,
       'address': newProduct.location!.address,
     });
-
-    await _productService.addProduct(
-      id: newProduct.id,
-      title: newProduct.title,
-      description: newProduct.description,
-      price: newProduct.price,
-      phone: newProduct.phone,
-      email: newProduct.email,
-      address: newProduct.location!.address ?? '',
-      latitude: newProduct.location!.latitude,
-      longitude: newProduct.location!.longitude,
-      imageUrl: img.path, // Adapte se precisar de outra lógica para URLs
-    );
 
     notifyListeners();
   }
@@ -71,8 +57,8 @@ class ProductsModel with ChangeNotifier {
   void removeProduct(String id) async {
     await DbUtil.delete('products', id);
 
-    // Remove do Firebase
-    await _productService.removeProduct(id);
+    /* // Remove do Firebase
+    await _productService.removeProduct(id); */
 
     //remove da lista local
     _items.removeWhere((product) => product.id == id);
