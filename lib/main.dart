@@ -1,17 +1,27 @@
-import 'package:nuptia/pages/auth/login.dart';
-import 'package:nuptia/pages/auth/selectUser.dart';
-import 'package:nuptia/pages/auth/register.dart';
-import 'package:nuptia/pages/auth/forgotPassword.dart';
-import 'package:nuptia/pages/auth/splashScreen.dart';
-import 'package:nuptia/pages/auth/welcomeScreen.dart';
-
+import 'package:BemCasados/pages/gifts_list_page.dart';
+import 'package:BemCasados/pages/notifications_screen.dart';
+import 'package:BemCasados/pages/profile_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:nuptia/model/userList.dart';
+import 'package:BemCasados/pages/auth/login.dart';
+import 'package:BemCasados/pages/auth/selectUser.dart';
+import 'package:BemCasados/pages/auth/register.dart';
+import 'package:BemCasados/pages/auth/forgotPassword.dart';
+import 'package:BemCasados/pages/create_product_screen.dart';
+import 'package:BemCasados/pages/intro/splashScreen.dart';
+import 'package:BemCasados/pages/intro/introFirstStep.dart';
+import 'package:BemCasados/pages/intro/introSecondStep.dart';
+import 'package:BemCasados/pages/intro/introThirdStep.dart';
+
+import 'package:BemCasados/model/userList.dart';
+import 'package:BemCasados/pages/home/home.dart';
+import 'package:BemCasados/pages/marketplace/marketplace.dart'; // Importando a página do marketplace
 import 'package:provider/provider.dart';
-import 'package:nuptia/utils/routes.dart';
+import 'package:BemCasados/utils/routes.dart';
+
+final String API_KEY = 'AIzaSyBdq5B1nT885EM68SgPuPANNzKd6nnsNc4';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -22,20 +32,22 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  bool isProvider = false; // Inicialize a variável
+
+  void selectUser(bool user) {
+    setState(() {
+      isProvider = user;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    late bool isProvider;
-
-    void selectUser(bool user) {
-      isProvider = user;
-    }
-
     return ChangeNotifierProvider(
       create: (context) => UserList(),
       child: MaterialApp(
-        title: 'Meu Casório Club',
+        title: 'Bem Casados',
         theme: ThemeData(
-            fontFamily: 'Lato',
+            fontFamily: 'Inter',
             colorScheme: ThemeData().copyWith().colorScheme.copyWith(
                 primary: Color.fromRGBO(213, 29, 72, 100),
                 surface: Color.fromRGBO(184, 184, 184, 70)),
@@ -55,15 +67,22 @@ class _MyAppState extends State<MyApp> {
             )),
         home: SplashScreen(),
         routes: {
-          Routes.WELCOME_SCREEN: (context) => WelcomeScreen(),
+          Routes.INTRO_FIRST_STEP: (context) => IntroFirstStep(),
+          Routes.INTRO_SECOND_STEP: (context) => IntroSecondStep(),
+          Routes.INTRO_THIRD_STEP: (context) => IntroThirdStep(),
           Routes.SELECT_USER: (context) => SelectUser(onSelected: selectUser),
-          Routes.LOGIN: (context) => Login(
-                isProvider: isProvider,
-              ),
-          Routes.FORGOT_PASSWORD: (context) => ForgotPassword(
-                isProvider: isProvider,
-              ),
+          Routes.LOGIN: (context) => Login(isProvider: isProvider),
+          Routes.FORGOT_PASSWORD: (context) =>
+              ForgotPassword(isProvider: isProvider),
           Routes.REGISTER: (context) => Register(isProvider: isProvider),
+          Routes.PRODUCT_FORM: (context) => CreateProductScreen(),
+
+          Routes.HOME_SCREEN: (context) => HomeScreen(),
+          Routes.NOTIFICATIONS_SCREEN: (context) => NotificationsScreen(),
+          Routes.MARKETPLACE_SCREEN: (context) =>
+              MarketplacePage(), // Rota para MarketplacePage
+          Routes.GIFTS_LIST_SCREEN: (context) => GiftsListScreen(),
+          Routes.PROFILE_SCREEN: (context) => ProfileScreen(),
         },
         debugShowCheckedModeBanner: false,
       ),

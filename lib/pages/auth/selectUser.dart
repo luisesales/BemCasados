@@ -8,30 +8,12 @@ class SelectUser extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        color: Theme.of(context).primaryColor,
-        child: Center(
-          child: ListView(
-            children: [
-              Expanded(
-                  flex: 1, child: SvgPicture.asset("assets/images/logo.svg")),
-              Expanded(
-                flex: 3,
-                child: Image.asset(
-                  'assets/images/casal_tomando_cafe.png',
-                  height: MediaQuery.of(context).size.height * (2 / 3),
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: Container(
+                Container(
                   margin: EdgeInsets.only(top: 40, left: 16, right: 16),
                   child: Column(
                     children: [
                       SizedBox(
-                        width: double
-                            .infinity, // Isso faz o botão ocupar a linha inteira
+                        width: double.infinity,
                         child: ElevatedButton(
                           style: ButtonStyle(
                             foregroundColor:
@@ -55,12 +37,9 @@ class SelectUser extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Container(
-                        height: 16,
-                      ),
+                      SizedBox(height: 16),
                       SizedBox(
-                        width: double
-                            .infinity, // Isso faz o botão ocupar a linha inteira
+                        width: double.infinity,
                         child: ElevatedButton(
                           style: ButtonStyle(
                             foregroundColor:
@@ -87,11 +66,11 @@ class SelectUser extends StatelessWidget {
                     ],
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
-      ),
+      ]),
     );
   }
 }

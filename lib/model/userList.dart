@@ -2,14 +2,23 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:nuptia/model/user.dart';
+import 'package:BemCasados/model/user.dart';
 import 'package:flutter/cupertino.dart';
 
 class UserList with ChangeNotifier {
-  final _baseUrl = 'https://nuptia-c773d-default-rtdb.firebaseio.com/';
+  final _baseUrl = 'https://bemcasados-a6b2b-default-rtdb.firebaseio.com/';
   List<User> _userList = [];
+  User? _currentUser; // Adicionando o usuário atual
+
   List<User> get users {
     return [..._userList];
+  }
+
+  User? get currentUser => _currentUser;
+
+  void setCurrentUser(User user) {
+    _currentUser = user;
+    notifyListeners();
   }
 
   Future<List<User>> fetchUsers() async {

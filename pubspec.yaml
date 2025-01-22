@@ -1,4 +1,4 @@
-name: nuptia
+name: BemCasados
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.5.3
+  sdk: ^3.5.0
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -28,21 +28,38 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  google_fonts: ^5.0.0
   flutter:
     sdk: flutter
+  firebase_core: ^3.8.1
+  firebase_database: ^11.2.0
+  firebase_auth: ^5.3.4
+  http: ^1.2.2
+  uuid: ^4.5.1
+  intl: ^0.20.1
+  shared_preferences: ^2.3.3
+  carousel_slider: ^5.0.0
+  url_launcher: ^6.3.1
+
 
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
-  http: ^1.2.2
+  
   provider: ^6.1.2
   flutter_svg: ^2.0.16
-  shared_preferences: ^2.3.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  provider: ^6.1.2
+  sqflite: ^2.4.1
+  path_provider: ^2.1.5
+  path: 1.9.0
+  image_picker: ^1.1.2
+  location: ^7.0.0
+  google_maps_flutter: ^2.10.0
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -58,8 +75,20 @@ dev_dependencies:
 flutter:
   assets: 
   - assets/images/logo.svg  
+  - assets/images/logobc.svg  
   - assets/images/casal_na_moto.png
   - assets/images/casal_tomando_cafe.png
+  - assets/images/select_user_image.png
+  - assets/images/casal_se_abracando.png
+  - assets/images/0008-danibruno_pw-1000x668.png
+  - assets/images/wedding_dress1.jpg
+  - assets/images/wedding_dress2.jpg
+  - assets/images/wedding_dress3.jpg
+  - assets/images/photo_camera.png
+  - assets/images/restaurant.png
+  - assets/images/decoration.png
+  - assets/images/cake.png
+  - assets/images/music_band.png
 
 
   # The following line ensures that the Material Icons font is
