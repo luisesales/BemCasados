@@ -64,7 +64,6 @@ class ForgotPassword extends StatelessWidget {
                     FormFieldPersonal(
                       label: 'Email',
                       node: _emailFocus,
-                      hide: false,
                       onReturn: (String data) {
                         setData(data, 'username');
                       },

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-
-=======
 import 'package:BemCasados/pages/create_product_screen.dart';
 import 'package:BemCasados/widgets/CustomAppBar.dart';
 import 'package:BemCasados/widgets/CustomBottomNavigationBar.dart';
