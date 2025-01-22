@@ -8,25 +8,6 @@ class SelectUser extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(children: <Widget>[
-        Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/images/select_user_image.png'),
-              fit: BoxFit.cover,
-            ),
-          ),
-        ),
-        Container(
-          height: MediaQuery.of(context).size.height,
-          color: Theme.of(context).primaryColor,
-          child: Center(
-            child: ListView(
-              children: [
-                SvgPicture.asset("assets/images/logobc.svg", height: 100),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 2 / 3,
-                ),
                 Container(
                   margin: EdgeInsets.only(top: 40, left: 16, right: 16),
                   child: Column(

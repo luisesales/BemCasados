@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class FormFieldPersonal extends StatelessWidget {
   final String label;
   final FocusNode node;
+  final bool hide;
   final Function(String) onReturn;
   final String? Function(String?)? validator;
 
@@ -10,6 +11,7 @@ class FormFieldPersonal extends StatelessWidget {
     super.key,
     required this.label,
     required this.node,
+    required this.hide,
     required this.onReturn,
     this.validator,
   });
@@ -55,8 +57,6 @@ class FormFieldPersonal extends StatelessWidget {
             onReturn(value);
             FocusScope.of(context).requestFocus(node);
           },
-          onSaved: (value) {
-            onReturn(value ?? '');
           },
           validator: validator,
         ),

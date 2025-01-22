@@ -22,16 +22,7 @@ class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
   final _formData = <String, String>{};
   String _errorMessage = '';
-
-  void setData(String input, String data) {
-    _formData[data] = input;
-  }
-
-  Future<void> login() async {
-    if (!_formKey.currentState!.validate()) {
-      return;
     }
-
     _formKey.currentState!.save();
 
     if (_formData['email'] == null || _formData['password'] == null) {
@@ -89,36 +80,9 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        height: MediaQuery.of(context).size.height,
         color: Theme.of(context).primaryColor,
         child: Center(
-          heightFactor: MediaQuery.of(context).size.height,
-          child: Column(
-            children: [
-              Expanded(
-                flex: 1,
-                child: SvgPicture.asset("assets/images/logobc.svg"),
-              ),
-              Expanded(
-                flex: 4,
-                child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: 48),
-                  child: Form(
-                    key: _formKey,
-                    child: ListView(
-                      children: [
-                        if (_errorMessage.isNotEmpty)
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 8.0),
-                            child: Text(
-                              _errorMessage,
-                              style: TextStyle(color: Colors.red),
-                            ),
-                          ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                            Navigator.of(context)
-                                .pushReplacementNamed('/select-user');
                           },
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.end,
