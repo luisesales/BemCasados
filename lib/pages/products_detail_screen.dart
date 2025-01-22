@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:share_plus/share_plus.dart';
 
 final String API_KEY = 'AIzaSyD5Apzo6cOxFxXYSLflSJwxrOdfNWQ3TMk';
 
@@ -64,8 +65,11 @@ class ProductDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
-        backgroundColor: Colors.indigo,
+        title: Text(
+          "Anúncio de $title",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.blue.shade900,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -113,6 +117,33 @@ class ProductDetailScreen extends StatelessWidget {
                       width: double.infinity,
                       fit: BoxFit.cover,
                     ),
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 30),
+                      Center(
+                        child: ElevatedButton(
+                          child: Text(
+                            'Compartilhar anúncio',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.white,
+                            ),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.black,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 12),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                          onPressed: () => Share.share(
+                              'Veja o meu anúncio de $title no app Bem Casados!'),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
