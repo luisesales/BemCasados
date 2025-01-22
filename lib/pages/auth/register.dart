@@ -82,6 +82,19 @@ class _RegisterState extends State<Register> {
         color: Theme.of(context).primaryColor,
         child: Center(
           heightFactor: MediaQuery.of(context).size.height,
+          child: Column(
+            children: [
+              Expanded(
+                flex: 1,
+                child: SvgPicture.asset("assets/images/logobc.svg"),
+              ),
+              Expanded(
+                flex: 4,
+                child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 48),
+                  child: Form(
+                    key: _formKey,
+                    child: ListView(
                       children: [
                         if (_errorMessage.isNotEmpty)
                           Padding(
