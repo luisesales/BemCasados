@@ -3,7 +3,9 @@ import 'package:BemCasados/model/userList.dart';
 import 'package:BemCasados/pages/products_detail_screen.dart';
 import 'package:BemCasados/provider/products_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:vibration/vibration.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -144,33 +146,89 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 icon: Icon(Icons.delete, color: Colors.black),
                                 onPressed: () async {
                                   final confirm = await showDialog<bool>(
-                                    context: context,
-                                    builder: (ctx) => AlertDialog(
-                                      title: Text('Confirmação'),
-                                      content: Text(
-                                        'Deseja realmente remover este produto?',
-                                      ),
-                                      actions: [
-                                        TextButton(
-                                          child: Text('Cancelar'),
-                                          onPressed: () =>
-                                              Navigator.of(ctx).pop(false),
-                                        ),
-                                        ElevatedButton(
-                                          child: Text('Remover'),
-                                          style: ElevatedButton.styleFrom(
-                                              backgroundColor: Colors.black),
-                                          onPressed: () =>
-                                              Navigator.of(ctx).pop(true),
-                                        ),
-                                      ],
-                                    ),
-                                  );
+                                      context: context,
+                                      builder: (ctx) => AlertDialog(
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(
+                                                  8), // Borda menos arredondada
+                                            ),
+                                            backgroundColor: Color(
+                                                0xFFF5F5F5), // Branco acinzentado
+                                            title: Text(
+                                              'Confirmação',
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold,
+                                                color:
+                                                    Colors.black, // Cor preta
+                                              ),
+                                            ),
+                                            content: Text(
+                                              'Deseja realmente remover este produto?',
+                                              style: TextStyle(
+                                                fontSize:
+                                                    15, // Mesmo tamanho do título
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                            actions: [
+                                              TextButton(
+                                                child: Text(
+                                                  'Cancelar',
+                                                  style: TextStyle(
+                                                    fontSize:
+                                                        14, // Menor tamanho
+                                                    color: Colors
+                                                        .black, // Cor preta
+                                                  ),
+                                                ),
+                                                onPressed: () =>
+                                                    Navigator.of(ctx)
+                                                        .pop(false),
+                                              ),
+                                              ElevatedButton(
+                                                child: Text(
+                                                  'Remover',
+                                                  style: TextStyle(
+                                                    fontSize: 14,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                                style: ElevatedButton.styleFrom(
+                                                  backgroundColor: Colors.black,
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                  ),
+                                                ),
+                                                onPressed: () =>
+                                                    Navigator.of(ctx).pop(true),
+                                              ),
+                                            ],
+                                          ));
 
                                   if (confirm == true) {
+                                    if (await Vibration.hasVibrator() ??
+                                        false) {
+                                      Vibration.vibrate();
+                                    }
                                     Provider.of<ProductsModel>(context,
                                             listen: false)
                                         .removeProduct(product.id);
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: const Text(
+                                            'Anúncio removido com sucesso!'),
+                                        duration: const Duration(seconds: 2),
+                                        backgroundColor: Colors.black,
+                                        behavior: SnackBarBehavior.floating,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                      ),
+                                    );
                                   }
                                 },
                               ),
