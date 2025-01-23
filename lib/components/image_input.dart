@@ -18,10 +18,10 @@ class _ImageInputState extends State<ImageInput> {
   //Capturando Imagem
   File? _storedImage;
 
-  _takePicture() async {
+  _takePicture(ImageSource source) async {
     final ImagePicker _picker = ImagePicker();
     XFile imageFile = await _picker.pickImage(
-      source: ImageSource.camera,
+      source: source,
       maxWidth: 600,
     ) as XFile;
 
@@ -81,7 +81,9 @@ class _ImageInputState extends State<ImageInput> {
                   color: Colors.black,
                 ),
               ),
-              onPressed: _takePicture,
+              onPressed: () {
+                _takePicture(ImageSource.camera);
+              },
             ),
             TextButton.icon(
               icon: Icon(
@@ -95,7 +97,9 @@ class _ImageInputState extends State<ImageInput> {
                   color: Colors.black,
                 ),
               ),
-              onPressed: () {} /* _selectFromGallery */,
+              onPressed: () {
+                _takePicture(ImageSource.gallery);
+              } /* _selectFromGallery */,
             ),
           ],
         ),
