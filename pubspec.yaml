@@ -55,6 +55,7 @@ dependencies:
   flutter_svg: ^2.0.16
   firebase_messaging: ^15.2.1
   firebase_analytics: ^11.4.1
+  flutter_launcher_icons: ^0.14.3
 
 dev_dependencies:
   flutter_test:
@@ -76,7 +77,14 @@ dev_dependencies:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
+flutter_launcher_icons:
+  image_path: "assets/icons/icon.png"
+  android: true
+  adaptive_icon_background: "#D51D48"  
+  ios: true  
+  remove_alpha_ios: true  
+  background_color_ios: "#D51D48"
+  min_android_sdk: 23
 # The following section is specific to Flutter packages.
 flutter:
   assets: 

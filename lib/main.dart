@@ -13,6 +13,7 @@ import 'package:BemCasados/pages/intro/splashScreen.dart';
 import 'package:BemCasados/pages/intro/introFirstStep.dart';
 import 'package:BemCasados/pages/intro/introSecondStep.dart';
 import 'package:BemCasados/pages/intro/introThirdStep.dart';
+import 'package:BemCasados/firebase/firebase_api.dart';
 
 import 'package:BemCasados/model/userList.dart';
 import 'package:BemCasados/pages/home/home.dart';
@@ -24,6 +25,19 @@ import 'package:firebase_core/firebase_core.dart';
 final String API_KEY = 'AIzaSyBdq5B1nT885EM68SgPuPANNzKd6nnsNc4';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+      name: 'BemCasados',
+      options: FirebaseOptions(
+        apiKey: 'AIzaSyBqvcEjTpPvyqDmQsFPz-xj_nSRfBPBe_8',
+        appId: '1:500376755374:android:b13ce64a493d693327a13f',
+        messagingSenderId: '500376755374',
+        projectId: 'bemcasados-a6b2b',
+        storageBucket: 'bemcasados-a6b2b.firebasestorage.app',
+      ));
+  await FirebaseApi().initNotificaction();
+  await FirebaseApi().setupFlutterNotifications();
+
   runApp(
     MultiProvider(
       providers: [
